@@ -1,0 +1,24 @@
+{
+  "name": "FestivalTyp Quiz",
+  "short_name": "FestivalTyp",
+  "description": "Offline-faehiges Festival-Quiz fuer Tablets im Eventbetrieb.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fff5df",
+  "theme_color": "#f4b942",
+  "orientation": "landscape",
+  "icons": [
+    {
+      "src": "/icon-192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
