@@ -130,7 +130,7 @@ export default function App() {
         <header className="app-header">
           <div className="brand-block">
             <p className="eyebrow">Festival Quiz</p>
-            <h1>Welcher Festival-Typ bist du?</h1>
+            <h1>Welcher Festival-Typ passt zu dir?</h1>
           </div>
           <div className="header-actions">
             <button className="ghost-button" onClick={() => setState(initialState)} type="button">
@@ -147,15 +147,21 @@ export default function App() {
                 <span className="badge">4 Festival-Typen</span>
                 <span className="badge">4 Regionen in Bayern</span>
               </div>
-              <h2>Festival-Vibe rein. Bayern-Match raus.</h2>
-              <p className="lead">
-                Finde in wenigen Schritten heraus, welcher Festival-Typ du bist und welche Region in Bayern zu dir passt.
-              </p>
+              <div className="hero-copy-main">
+                <h2>
+                  Dein Festival-Vibe.
+                  <br />
+                  Dein Bayern-Match.
+                </h2>
+                <p className="lead">
+                  Finde in wenigen Schritten heraus, welcher Festival-Typ du bist und welche Region in Bayern zu dir passt.
+                </p>
+              </div>
               <div className="cta-row intro-actions">
+                <p className="hint">Schnell, spielerisch und mit einem klaren Match fuer deinen Festival-Charakter.</p>
                 <button className="primary-button" onClick={startQuiz} type="button">
                   Quiz starten
                 </button>
-                <p className="hint">Schnell, spielerisch und mit einem klaren Match fuer deinen Festival-Charakter.</p>
               </div>
             </div>
 
@@ -178,7 +184,7 @@ export default function App() {
 
         {state.screen === 'quiz' && currentQuestion ? (
           <section className="question-card">
-            <aside className="question-aside">
+            <div className="question-header-panel">
               <div className="question-topline">
                 <span>{currentQuestion.kicker}</span>
                 <span>{progress}% abgeschlossen</span>
@@ -199,7 +205,7 @@ export default function App() {
                   Frage {state.currentQuestion + 1} von {totalQuestions}
                 </p>
               </div>
-            </aside>
+            </div>
 
             <div className="answers-grid">
               {currentQuestion.answers.map((answer, answerIndex) => (

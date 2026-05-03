@@ -1,5 +1,5 @@
-export type FestivalTypeId = 'freigeist' | 'nachtmensch' | 'genussmensch' | 'entdecker'
-export type RegionId = 'allgaeu' | 'franken' | 'oberbayern' | 'bayerischer-wald'
+export type FestivalTypeId = 'alpenrausch' | 'seensucht' | 'cityflow' | 'waldrausch'
+export type RegionId = 'allgaeu' | 'seenland' | 'staedte' | 'bayerischer-wald'
 
 export type ResultMeta = {
   id: FestivalTypeId | RegionId
@@ -24,190 +24,228 @@ export type Question = {
 }
 
 export const festivalTypes: Record<FestivalTypeId, ResultMeta> = {
-  freigeist: {
-    id: 'freigeist',
-    title: 'Freigeist',
-    subtitle: 'Du suchst Atmosphaere, Stil und ungeplante Highlights.',
-    description: 'Du magst besondere Orte, gute Stories und ein Wochenende, das sich nicht nach Standard anfuehlt.',
-    color: '#db6d52'
+  alpenrausch: {
+    id: 'alpenrausch',
+    title: 'Alpenrausch',
+    subtitle: 'Große Gefühle, klare Luft und Aussicht mit Nachhall.',
+    description:
+      'Heute tanzt du im Bass, morgen stehst du am Gipfel. Du suchst Intensität, Freiheit und diese Momente, die lange bleiben.',
+    color: '#2d63b8'
   },
-  nachtmensch: {
-    id: 'nachtmensch',
-    title: 'Nachtmensch',
-    subtitle: 'Dein Festival beginnt, wenn andere ans Aufraeumen denken.',
-    description: 'Energie, Beats und spontane Eskalation ziehen dich an. Hauptsache intensiv und mit Zug nach spaet.',
-    color: '#7d53de'
+  seensucht: {
+    id: 'seensucht',
+    title: 'Seensucht',
+    subtitle: 'Wasser, Weite und gute Vibes nach einer langen Nacht.',
+    description:
+      'Du brauchst Sonne auf der Haut, einen Steg am Wasser und genug Leichtigkeit, um Festival-Ekstase in Erholung zu verwandeln.',
+    color: '#2f8db7'
   },
-  genussmensch: {
-    id: 'genussmensch',
-    title: 'Genussmensch',
-    subtitle: 'Du willst gutes Essen, entspannte Vibes und null Stress.',
-    description: 'Fuer dich zaehlt das Gesamtgefuehl: ankommen, geniessen, Leute treffen und den Tag sauber ausklingen lassen.',
-    color: '#f0a93b'
+  cityflow: {
+    id: 'cityflow',
+    title: 'Cityflow',
+    subtitle: 'Urban, schnell und immer auf der Suche nach dem nächsten Spot.',
+    description:
+      'Tagsüber Coffee Spots, nachts Clubs. Du magst Kontraste, Szenegefühl und Orte, an denen immer noch ein zweiter Abend wartet.',
+    color: '#6d52c8'
   },
-  entdecker: {
-    id: 'entdecker',
-    title: 'Entdecker',
-    subtitle: 'Du kombinierst Festival mit Ausflug, Natur und neuen Eindruecken.',
-    description: 'Musik ist wichtig, aber du willst rundherum etwas erleben: Wege, Aussicht, Wasser, Kultur oder kleine Umwege.',
-    color: '#3f9d73'
+  waldrausch: {
+    id: 'waldrausch',
+    title: 'Waldrausch',
+    subtitle: 'Deep, erdend und am liebsten mit Natur als Gegenpol.',
+    description:
+      'Du liebst intensive Nächte, brauchst aber Wald, Ruhe und Weite zum Auftanken. Nebel über Baumwipfeln schlägt Großstadtlärm.',
+    color: '#2f7a61'
   }
 }
 
 export const regions: Record<RegionId, ResultMeta> = {
   allgaeu: {
     id: 'allgaeu',
-    title: 'Allgaeu',
-    subtitle: 'Leicht, offen und nah an Bergen und Sommergefuehl.',
-    description: 'Passt zu dir, wenn du Natur, Weite und eine lockere, warme Festivalstimmung suchst.',
-    color: '#6bbf59'
+    title: 'Allgäu & Alpenrand',
+    subtitle: 'Für freie Köpfe, Höhenluft und ein Wochenende mit Weitblick.',
+    description:
+      'Dein Match liegt zwischen Bergen, klaren Seen und dem Gefühl, sofort draußen und weit weg zu sein.',
+    color: '#3a79d0'
   },
-  franken: {
-    id: 'franken',
-    title: 'Franken',
-    subtitle: 'Charmant, genussorientiert und kulturell stark.',
-    description: 'Gut fuer dich, wenn du Charakter, Kulinarik und ein bisschen lokale Eigenheit schaetzt.',
-    color: '#c95c54'
+  seenland: {
+    id: 'seenland',
+    title: 'Bayerns Seen',
+    subtitle: 'Sonnenuntergang, Badesteg und Recovery mit Aussicht.',
+    description:
+      'Chiemsee, Starnberger See oder Fränkisches Seenland passen zu dir, wenn dein perfekter Ausklang leicht, offen und wassernahe ist.',
+    color: '#2f9abf'
   },
-  oberbayern: {
-    id: 'oberbayern',
-    title: 'Oberbayern',
-    subtitle: 'Lebendig, vielseitig und mit starkem Gemeinschaftsgefuehl.',
-    description: 'Die richtige Richtung, wenn du auf Energie, gute Erreichbarkeit und grosse Momente stehst.',
-    color: '#3f7ad9'
+  staedte: {
+    id: 'staedte',
+    title: 'Bayerns Städte',
+    subtitle: 'Szene, Kultur und ein Flow zwischen Gassen, Bars und Rooftops.',
+    description:
+      'München, Nürnberg, Würzburg oder Regensburg passen zu dir, wenn du Energie, Stil und urbane Kontraste suchst.',
+    color: '#7a5ad2'
   },
   'bayerischer-wald': {
     id: 'bayerischer-wald',
     title: 'Bayerischer Wald',
-    subtitle: 'Ruhiger, tiefer und dichter dran an Natur und Rueckzug.',
-    description: 'Das passt, wenn du Authentizitaet, Landschaft und ein etwas entschleunigteres Erlebnis suchst.',
-    color: '#306b57'
+    subtitle: 'Natur, Tiefe und ein bisschen Mystik nach dem Bass.',
+    description:
+      'Hier passt du hin, wenn dein ideales Festival-Wochenende auch Raum für Waldwege, Nebel und echte Entschleunigung braucht.',
+    color: '#31735e'
   }
 }
 
 export const questions: Question[] = [
   {
-    id: 'arrival',
+    id: 'sunday',
     kicker: 'Frage 1',
-    prompt: 'Wie startet dein perfekter Festival-Tag?',
+    prompt: 'Dein perfekter Sonntag nach dem Festival?',
     answers: [
       {
-        label: 'Mit Kaffee, Sonne und einem ruhigen Spaziergang ueber das Gelaende',
-        detail: 'Entspannt ankommen',
-        typeScores: { genussmensch: 2, entdecker: 1 },
-        regionScores: { allgaeu: 1, 'bayerischer-wald': 2 }
+        label: 'Ab an den See. Ruhe, Sonne, einfach treiben lassen.',
+        detail: 'See statt Stress',
+        typeScores: { seensucht: 3 },
+        regionScores: { seenland: 3 }
       },
       {
-        label: 'Mit Plan, Marker im Running Order und direkt zur ersten Entdeckung',
-        detail: 'Alles mitnehmen',
-        typeScores: { entdecker: 2, freigeist: 1 },
-        regionScores: { oberbayern: 1, allgaeu: 2 }
+        label: 'City-Brunch, später Rooftop-Bar und noch ein bisschen weiterziehen.',
+        detail: 'Stadt zieht weiter',
+        typeScores: { cityflow: 3 },
+        regionScores: { staedte: 3 }
       },
       {
-        label: 'Mit wenig Schlaf und der Frage, wo die Afterhour heute endet',
-        detail: 'Maximalmodus',
-        typeScores: { nachtmensch: 3 },
-        regionScores: { oberbayern: 2, franken: 1 }
+        label: 'Wanderschuhe an und rauf auf einen Gipfel mit Aussicht.',
+        detail: 'Höhe statt Kater',
+        typeScores: { alpenrausch: 3 },
+        regionScores: { allgaeu: 3 }
+      },
+      {
+        label: 'Mit Freunden durch kleine Gassen oder Waldwege treiben lassen.',
+        detail: 'Leise weiterfühlen',
+        typeScores: { waldrausch: 2, seensucht: 1 },
+        regionScores: { 'bayerischer-wald': 2, staedte: 1 }
       }
     ]
   },
   {
-    id: 'lineup',
+    id: 'sound',
     kicker: 'Frage 2',
-    prompt: 'Was reizt dich bei einem Line-up am meisten?',
+    prompt: 'Welcher Sound-Vibe passt heute zu dir?',
     answers: [
       {
-        label: 'Ueberraschende Acts und kleine Geheimtipps',
-        detail: 'Entdecken statt abhaken',
-        typeScores: { freigeist: 2, entdecker: 1 },
-        regionScores: { franken: 1, allgaeu: 1 }
-      },
-      {
-        label: 'Der eine Headliner, fuer den man spaet noch komplett eskaliert',
-        detail: 'Druck auf dem Floor',
-        typeScores: { nachtmensch: 3 },
-        regionScores: { oberbayern: 2 }
-      },
-      {
-        label: 'Ein stimmiges Gesamtprogramm mit Genussfaktor',
-        detail: 'Das Gesamtpaket',
-        typeScores: { genussmensch: 2, freigeist: 1 },
-        regionScores: { franken: 2 }
-      }
-    ]
-  },
-  {
-    id: 'camp',
-    kicker: 'Frage 3',
-    prompt: 'Welche Stimmung im Umfeld passt am besten zu dir?',
-    answers: [
-      {
-        label: 'Weniger Trubel, mehr Natur und Platz zum Durchatmen',
-        detail: 'Luft nach oben',
-        typeScores: { entdecker: 2, genussmensch: 1 },
+        label: 'Deep und atmosphärisch, eher Sog als Show.',
+        detail: 'Tief rein',
+        typeScores: { waldrausch: 3 },
         regionScores: { 'bayerischer-wald': 3 }
       },
       {
-        label: 'Viele Leute, viel Bewegung, immer irgendwo etwas los',
-        detail: 'Dauerstrom',
-        typeScores: { nachtmensch: 2, freigeist: 1 },
-        regionScores: { oberbayern: 2 }
+        label: 'Urban Pop und Hip-Hop mit Druck nach vorne.',
+        detail: 'City auf laut',
+        typeScores: { cityflow: 3 },
+        regionScores: { staedte: 3 }
       },
       {
-        label: 'Charmante Ecken, gutes Essen und entspannte Gespraeche',
-        detail: 'Qualitaet vor Lautstaerke',
-        typeScores: { genussmensch: 2 },
-        regionScores: { franken: 2, allgaeu: 1 }
+        label: 'Indie, Alternative oder Singer-Songwriter mit Weite.',
+        detail: 'Frei und offen',
+        typeScores: { alpenrausch: 2, seensucht: 1 },
+        regionScores: { allgaeu: 2, seenland: 1 }
+      },
+      {
+        label: 'Party, Throwbacks und dieser eine Song, den alle mitgrölen.',
+        detail: 'Leicht und laut',
+        typeScores: { seensucht: 2, cityflow: 1 },
+        regionScores: { seenland: 2, staedte: 1 }
       }
     ]
   },
   {
-    id: 'group',
+    id: 'crew',
+    kicker: 'Frage 3',
+    prompt: 'Deine Crew beschreibt dich am ehesten als …',
+    answers: [
+      {
+        label: 'freiheitsliebend und immer offen für den spontanen Abzweig',
+        detail: 'Freigeist',
+        typeScores: { alpenrausch: 3 },
+        regionScores: { allgaeu: 3 }
+      },
+      {
+        label: 'Trendsetter mit Gespür für neue Orte und gute Szenen',
+        detail: 'Vorne dabei',
+        typeScores: { cityflow: 3 },
+        regionScores: { staedte: 3 }
+      },
+      {
+        label: 'Naturmensch, der nach der Nacht wieder Luft braucht',
+        detail: 'Draußen zuhause',
+        typeScores: { waldrausch: 3 },
+        regionScores: { 'bayerischer-wald': 3 }
+      },
+      {
+        label: 'Genießer, der Stimmung, Menschen und den Moment sammelt',
+        detail: 'Vibes statt Hektik',
+        typeScores: { seensucht: 2, cityflow: 1 },
+        regionScores: { seenland: 2, staedte: 1 }
+      }
+    ]
+  },
+  {
+    id: 'insta',
     kicker: 'Frage 4',
-    prompt: 'Wie beschreiben dich Freunde auf einem Event?',
+    prompt: 'Was wäre dein perfektes Motiv direkt nach dem Festival?',
     answers: [
       {
-        label: 'Du findest immer die besondere Ecke, bevor sie alle kennen',
-        detail: 'Radar fuer gute Orte',
-        typeScores: { freigeist: 3 },
-        regionScores: { allgaeu: 1, franken: 1 }
+        label: 'Sonnenuntergang über Bergen',
+        detail: 'Horizont an',
+        typeScores: { alpenrausch: 3 },
+        regionScores: { allgaeu: 3 }
       },
       {
-        label: 'Du haeltst die Gruppe bis spaet zusammen und ziehst nochmal weiter',
-        detail: 'Motor der Nacht',
-        typeScores: { nachtmensch: 3 },
-        regionScores: { oberbayern: 1, franken: 1 }
+        label: 'Street Art, Skyline und Licht von oben',
+        detail: 'Stadtbild mit Puls',
+        typeScores: { cityflow: 3 },
+        regionScores: { staedte: 3 }
       },
       {
-        label: 'Du achtest darauf, dass es allen gut geht und der Tag rund wird',
-        detail: 'Sozialer Ruhepol',
-        typeScores: { genussmensch: 2, entdecker: 1 },
-        regionScores: { 'bayerischer-wald': 1, allgaeu: 2 }
+        label: 'Spiegelnder Bergsee oder ein stiller Steg am Wasser',
+        detail: 'Ruhe in Blau',
+        typeScores: { seensucht: 3 },
+        regionScores: { seenland: 3 }
+      },
+      {
+        label: 'Waldkante, Nebel und ein Weg, der einfach weiterführt',
+        detail: 'Mystisch raus',
+        typeScores: { waldrausch: 3 },
+        regionScores: { 'bayerischer-wald': 3 }
       }
     ]
   },
   {
-    id: 'memory',
+    id: 'recovery',
     kicker: 'Frage 5',
-    prompt: 'Woran erinnerst du dich Wochen spaeter am ehesten?',
+    prompt: 'Wie klingt für dich das beste Festival-Recovery-Wochenende?',
     answers: [
       {
-        label: 'An diesen einen magischen Moment mit Kulisse und Gaensehaut',
-        detail: 'Das besondere Bild bleibt',
-        typeScores: { freigeist: 2, entdecker: 1 },
-        regionScores: { allgaeu: 2, 'bayerischer-wald': 1 }
+        label: 'Wellness, klare Luft und ein Zimmer mit Bergblick',
+        detail: 'Runterkommen mit Aussicht',
+        typeScores: { alpenrausch: 2, seensucht: 1 },
+        regionScores: { allgaeu: 3 }
       },
       {
-        label: 'An die Nacht, die komplett aus dem Ruder lief und genau richtig war',
-        detail: 'Legendengefahr',
-        typeScores: { nachtmensch: 3 },
-        regionScores: { oberbayern: 2 }
+        label: 'Badesee, Sonnenuntergang und tagsüber einfach nichts müssen',
+        detail: 'Recovery am Wasser',
+        typeScores: { seensucht: 3 },
+        regionScores: { seenland: 3 }
       },
       {
-        label: 'An Menschen, Geschmack, Stimmung und das runde Gesamtgefuehl',
-        detail: 'Der Vibe zaehlt',
-        typeScores: { genussmensch: 2 },
-        regionScores: { franken: 2, allgaeu: 1 }
+        label: 'Noch einen Tag Stadtgefühl: Kaffee, Kultur, später Drinks',
+        detail: 'Das Wochenende weiterziehen',
+        typeScores: { cityflow: 3 },
+        regionScores: { staedte: 3 }
+      },
+      {
+        label: 'Vanlife, Wald und endlich wieder tief durchatmen',
+        detail: 'Leiser, aber nicht langweilig',
+        typeScores: { waldrausch: 3 },
+        regionScores: { 'bayerischer-wald': 3 }
       }
     ]
   }

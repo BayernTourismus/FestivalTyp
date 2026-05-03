@@ -10,21 +10,21 @@ import {
 type ScoreMap<T extends string> = Record<T, number>
 
 const initialTypeScores = (): ScoreMap<FestivalTypeId> => ({
-  freigeist: 0,
-  nachtmensch: 0,
-  genussmensch: 0,
-  entdecker: 0
+  alpenrausch: 0,
+  seensucht: 0,
+  cityflow: 0,
+  waldrausch: 0
 })
 
 const initialRegionScores = (): ScoreMap<RegionId> => ({
   allgaeu: 0,
-  franken: 0,
-  oberbayern: 0,
+  seenland: 0,
+  staedte: 0,
   'bayerischer-wald': 0
 })
 
-const typeTieBreakOrder: FestivalTypeId[] = ['freigeist', 'genussmensch', 'entdecker', 'nachtmensch']
-const regionTieBreakOrder: RegionId[] = ['allgaeu', 'franken', 'oberbayern', 'bayerischer-wald']
+const typeTieBreakOrder: FestivalTypeId[] = ['alpenrausch', 'seensucht', 'cityflow', 'waldrausch']
+const regionTieBreakOrder: RegionId[] = ['allgaeu', 'seenland', 'staedte', 'bayerischer-wald']
 
 const pickWinner = <T extends string>(
   scores: ScoreMap<T>,
