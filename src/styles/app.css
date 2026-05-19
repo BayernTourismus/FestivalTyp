@@ -664,7 +664,158 @@ h3 {
   }
 }
 
-@media (max-width: 700px) {
+@media (min-width: 681px) and (max-width: 980px) {
+  body,
+  .app-shell {
+    overflow: hidden;
+  }
+
+  .experience-frame {
+    height: calc(100dvh - 20px);
+    min-height: 0;
+    padding: 16px;
+    border-radius: 24px;
+  }
+
+  .app-header {
+    padding-bottom: 10px;
+  }
+
+  .app-header h1 {
+    font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+  }
+
+  .eyebrow {
+    font-size: 0.7rem;
+  }
+
+  .attract-copy {
+    left: clamp(28px, 6vw, 54px);
+    right: 28px;
+    bottom: clamp(28px, 7vw, 64px);
+    gap: 18px;
+  }
+
+  .attract-copy h2 {
+    max-width: 9ch;
+    font-size: clamp(4rem, 9vw, 5.6rem);
+  }
+
+  .pulse-button {
+    min-height: 70px;
+    padding: 18px 28px;
+  }
+
+  .start-screen,
+  .question-screen,
+  .calculation-screen,
+  .result-screen {
+    margin-top: 12px;
+  }
+
+  .start-screen {
+    grid-template-columns: minmax(0, 1fr) minmax(210px, 0.38fr);
+    gap: 12px;
+  }
+
+  .start-copy {
+    padding: 24px;
+    gap: 16px;
+  }
+
+  .start-copy h2 {
+    max-width: 14ch;
+    font-size: clamp(2.6rem, 5vw, 3.4rem);
+  }
+
+  .start-copy p:not(.eyebrow),
+  .start-copy strong {
+    font-size: clamp(1.05rem, 1.8vw, 1.32rem);
+  }
+
+  .start-button {
+    min-height: 0;
+    padding: 20px;
+    font-size: clamp(1.8rem, 3.2vw, 2.7rem);
+  }
+
+  .question-screen {
+    gap: 12px;
+  }
+
+  .question-header-panel {
+    padding: 16px 18px;
+    gap: 10px;
+  }
+
+  .question-header-panel h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1;
+  }
+
+  .footer-row p {
+    font-size: 0.9rem;
+  }
+
+  .answers-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .answer-card {
+    min-height: 0;
+    border-radius: 18px;
+    padding: 18px 16px 16px 68px;
+  }
+
+  .answer-index {
+    top: 18px;
+    left: 18px;
+    width: 36px;
+    height: 36px;
+  }
+
+  .answer-card strong {
+    font-size: clamp(0.98rem, 1.7vw, 1.18rem);
+    line-height: 1.18;
+  }
+
+  .result-screen {
+    grid-template-columns: minmax(0, 1fr) minmax(250px, 0.38fr);
+    gap: 14px;
+    padding: 18px;
+  }
+
+  .result-copy {
+    gap: 10px;
+    padding: 12px;
+  }
+
+  .result-copy h2 {
+    font-size: clamp(3.2rem, 7vw, 5rem);
+  }
+
+  .result-copy h3 {
+    font-size: clamp(1.55rem, 3vw, 2.4rem);
+  }
+
+  .result-copy p {
+    font-size: clamp(0.9rem, 1.35vw, 1.02rem);
+    line-height: 1.28;
+  }
+
+  .qr-panel {
+    gap: 10px;
+    padding: 16px;
+  }
+
+  .qr-panel svg {
+    width: min(190px, 100%);
+  }
+}
+
+@media (max-width: 680px) {
   .app-shell {
     padding: 0;
   }
