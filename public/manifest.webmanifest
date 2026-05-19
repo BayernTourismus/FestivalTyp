@@ -1,11 +1,11 @@
 {
-  "name": "FestivalTyp Quiz",
-  "short_name": "FestivalTyp",
-  "description": "Offline-faehiges Festival-Quiz fuer Tablets im Eventbetrieb.",
+  "name": "Welcher Bayern-Typ bist du?",
+  "short_name": "Bayern-Typ",
+  "description": "Offline-faehiges Festival-Quiz fuer Musik & Tanz in Bayern.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#fff5df",
-  "theme_color": "#f4b942",
+  "background_color": "#eef6fb",
+  "theme_color": "#0050a0",
   "orientation": "landscape",
   "icons": [
     {
