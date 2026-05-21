@@ -1,256 +1,363 @@
-import { useEffect, useMemo, useState } from 'react'
-import { festivalTypes, questions } from './data/quiz'
-import { evaluateQuiz, totalQuestions } from './lib/scoring'
+import { useEffect, useMemo, useRef, useState } from "react";
+import { QRCodeSVG } from "qrcode.react";
+import { questions, results, type BayernTypeId } from "./data/quiz";
+import { evaluateQuiz, totalQuestions, type ScoreMap } from "./lib/scoring";
 
-const STORAGE_KEY = 'festivaltyp-demo-state'
-const IDLE_TIMEOUT_MS = 45_000
+const STORAGE_KEY = "festivaltyp-state-v2";
+const ANALYTICS_KEY = "festivaltyp-analytics-v1";
+const IDLE_TIMEOUT_MS = 30_000;
+const RESULT_TIMEOUT_MS = 120_000;
+const ANSWER_FEEDBACK_MS = 220;
+const CALCULATION_DELAY_MS = 1_700;
 
-type Screen = 'intro' | 'quiz' | 'result'
+type Screen = "attract" | "start" | "quiz" | "calculating" | "result";
 
 type AppState = {
-  screen: Screen
-  currentQuestion: number
-  selectedAnswers: number[]
-}
+  screen: Screen;
+  currentQuestion: number;
+  selectedAnswers: number[];
+  resultId: BayernTypeId | null;
+};
+
+type AnalyticsState = {
+  starts: number;
+  abandonments: number;
+  completions: number;
+  resultDistribution: Record<BayernTypeId, number>;
+};
 
 const initialState: AppState = {
-  screen: 'intro',
+  screen: "attract",
   currentQuestion: 0,
-  selectedAnswers: []
-}
+  selectedAnswers: [],
+  resultId: null,
+};
 
-const readStoredState = (): AppState => {
-  if (typeof window === 'undefined') {
-    return initialState
+const initialAnalytics = (): AnalyticsState => ({
+  starts: 0,
+  abandonments: 0,
+  completions: 0,
+  resultDistribution: {
+    "franken": 0,
+    "oberbayern": 0,
+    "ostbayern": 0,
+    "allgaeu-bayerisch-schwaben": 0,
+  },
+});
+
+const readJson = <T,>(key: string, fallback: T): T => {
+  if (typeof window === "undefined") {
+    return fallback;
   }
 
   try {
-    const raw = window.localStorage.getItem(STORAGE_KEY)
-    if (!raw) {
-      return initialState
-    }
-
-    const parsed = JSON.parse(raw) as AppState
-    if (!Array.isArray(parsed.selectedAnswers)) {
-      return initialState
-    }
-
-    return {
-      screen: parsed.screen ?? 'intro',
-      currentQuestion: parsed.currentQuestion ?? 0,
-      selectedAnswers: parsed.selectedAnswers
-    }
+    const raw = window.localStorage.getItem(key);
+    return raw ? (JSON.parse(raw) as T) : fallback;
   } catch {
-    return initialState
+    return fallback;
   }
-}
+};
+
+const readStoredState = (): AppState => {
+  const parsed = readJson<Partial<AppState>>(STORAGE_KEY, initialState);
+  const screen: Screen =
+    ["attract", "start", "quiz", "calculating", "result"].includes(parsed.screen ?? "") ? (parsed.screen as Screen) : "attract";
+
+  return {
+    screen,
+    currentQuestion: Math.min(Math.max(parsed.currentQuestion ?? 0, 0), totalQuestions - 1),
+    selectedAnswers: Array.isArray(parsed.selectedAnswers) ? parsed.selectedAnswers.slice(0, totalQuestions) : [],
+    resultId: parsed.resultId && parsed.resultId in results ? parsed.resultId : null,
+  };
+};
+
+const readAnalytics = () => readJson<AnalyticsState>(ANALYTICS_KEY, initialAnalytics());
+
+const persistAnalytics = (updater: (current: AnalyticsState) => AnalyticsState) => {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  const next = updater(readAnalytics());
+  window.localStorage.setItem(ANALYTICS_KEY, JSON.stringify(next));
+};
+
+const recordStart = () => {
+  persistAnalytics((current) => ({ ...current, starts: current.starts + 1 }));
+};
+
+const recordAbandonment = () => {
+  persistAnalytics((current) => ({ ...current, abandonments: current.abandonments + 1 }));
+};
+
+const recordCompletion = (resultId: BayernTypeId) => {
+  persistAnalytics((current) => ({
+    ...current,
+    completions: current.completions + 1,
+    resultDistribution: {
+      ...current.resultDistribution,
+      [resultId]: current.resultDistribution[resultId] + 1,
+    },
+  }));
+};
 
 export default function App() {
-  const [state, setState] = useState<AppState>(readStoredState)
+  const [state, setState] = useState<AppState>(readStoredState);
+  const [activeAnswerIndex, setActiveAnswerIndex] = useState<number | null>(null);
+  const answerTimerRef = useRef<number | undefined>();
 
   useEffect(() => {
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state))
-  }, [state])
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  }, [state]);
 
   useEffect(() => {
-    let timeoutId: number | undefined
+    if (state.screen === "attract") {
+      return undefined;
+    }
+
+    let timeoutId: number | undefined;
 
     const resetOnIdle = () => {
-      window.clearTimeout(timeoutId)
-      timeoutId = window.setTimeout(() => {
-        setState(initialState)
-      }, IDLE_TIMEOUT_MS)
-    }
+      window.clearTimeout(timeoutId);
+      timeoutId = window.setTimeout(
+        () => {
+          if (state.screen !== "result" && state.selectedAnswers.length > 0) {
+            recordAbandonment();
+          }
+          setActiveAnswerIndex(null);
+          setState(initialState);
+        },
+        state.screen === "result" ? RESULT_TIMEOUT_MS : IDLE_TIMEOUT_MS,
+      );
+    };
 
-    const events: Array<keyof WindowEventMap> = ['pointerdown', 'pointermove', 'keydown', 'touchstart']
+    const events: Array<keyof WindowEventMap> = ["pointerdown", "pointermove", "keydown", "touchstart"];
 
-    events.forEach((eventName) => window.addEventListener(eventName, resetOnIdle, { passive: true }))
-    resetOnIdle()
+    events.forEach((eventName) => window.addEventListener(eventName, resetOnIdle, { passive: true }));
+    resetOnIdle();
 
     return () => {
-      window.clearTimeout(timeoutId)
-      events.forEach((eventName) => window.removeEventListener(eventName, resetOnIdle))
+      window.clearTimeout(timeoutId);
+      events.forEach((eventName) => window.removeEventListener(eventName, resetOnIdle));
+    };
+  }, [state.screen, state.selectedAnswers.length]);
+
+  useEffect(() => {
+    if (state.screen !== "calculating" || state.resultId || state.selectedAnswers.length !== totalQuestions) {
+      return undefined;
     }
-  }, [])
 
-  const result = useMemo(() => {
-    if (state.selectedAnswers.length !== totalQuestions) {
-      return null
+    const timeoutId = window.setTimeout(() => {
+      const evaluation = evaluateQuiz(state.selectedAnswers);
+      recordCompletion(evaluation.resultId);
+      setState((current) => ({ ...current, screen: "result", resultId: evaluation.resultId }));
+    }, CALCULATION_DELAY_MS);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [state.resultId, state.screen, state.selectedAnswers]);
+
+  useEffect(() => {
+    return () => window.clearTimeout(answerTimerRef.current);
+  }, []);
+
+  const currentQuestion = questions[state.currentQuestion];
+  const result = state.resultId ? results[state.resultId] : null;
+  const progress = Math.round((state.currentQuestion / totalQuestions) * 100);
+  const resultScores = useMemo<ScoreMap | null>(() => {
+    if (state.resultId || state.selectedAnswers.length === totalQuestions) {
+      return evaluateQuiz(state.selectedAnswers).scores;
     }
 
-    return evaluateQuiz(state.selectedAnswers)
-  }, [state.selectedAnswers])
+    return null;
+  }, [state.resultId, state.selectedAnswers]);
 
-  const currentQuestion = questions[state.currentQuestion]
-  const progress = Math.round((state.selectedAnswers.length / totalQuestions) * 100)
+  const goToStart = () => {
+    setState({ ...initialState, screen: "start" });
+  };
 
   const startQuiz = () => {
+    recordStart();
+    setActiveAnswerIndex(null);
     setState({
-      screen: 'quiz',
+      screen: "quiz",
       currentQuestion: 0,
-      selectedAnswers: []
-    })
-  }
+      selectedAnswers: [],
+      resultId: null,
+    });
+  };
+
+  const resetToAttract = () => {
+    window.clearTimeout(answerTimerRef.current);
+    setActiveAnswerIndex(null);
+    setState(initialState);
+  };
 
   const chooseAnswer = (answerIndex: number) => {
-    const nextAnswers = [...state.selectedAnswers]
-    nextAnswers[state.currentQuestion] = answerIndex
-    const nextQuestion = state.currentQuestion + 1
+    if (activeAnswerIndex !== null) {
+      return;
+    }
 
-    setState({
-      screen: nextQuestion >= totalQuestions ? 'result' : 'quiz',
-      currentQuestion: Math.min(nextQuestion, totalQuestions - 1),
-      selectedAnswers: nextAnswers
-    })
-  }
+    setActiveAnswerIndex(answerIndex);
+    window.clearTimeout(answerTimerRef.current);
+
+    answerTimerRef.current = window.setTimeout(() => {
+      const nextAnswers = [...state.selectedAnswers];
+      nextAnswers[state.currentQuestion] = answerIndex;
+      const nextQuestion = state.currentQuestion + 1;
+
+      setActiveAnswerIndex(null);
+      setState({
+        screen: nextQuestion >= totalQuestions ? "calculating" : "quiz",
+        currentQuestion: Math.min(nextQuestion, totalQuestions - 1),
+        selectedAnswers: nextAnswers,
+        resultId: null,
+      });
+    }, ANSWER_FEEDBACK_MS);
+  };
 
   const goBack = () => {
     if (state.currentQuestion === 0) {
-      setState(initialState)
-      return
+      setState({ ...initialState, screen: "start" });
+      return;
     }
 
+    setActiveAnswerIndex(null);
     setState((current) => ({
-      screen: 'quiz',
+      screen: "quiz",
       currentQuestion: current.currentQuestion - 1,
-      selectedAnswers: current.selectedAnswers.slice(0, -1)
-    }))
-  }
+      selectedAnswers: current.selectedAnswers.slice(0, -1),
+      resultId: null,
+    }));
+  };
 
   return (
     <main className="app-shell">
-      <section className="device-frame">
-        <div className="raute-stage" aria-hidden="true">
-          <span className="raute raute-one" />
-          <span className="raute raute-two" />
-          <span className="raute raute-three" />
-          <span className="raute raute-four" />
+      <section className={`experience-frame screen-${state.screen}`}>
+        <div className="motion-backdrop" aria-hidden="true">
+          <span />
+          <span />
+          <span />
         </div>
 
-        <header className="app-header">
-          <div className="brand-block">
-            <p className="eyebrow">Festival Quiz</p>
-            <h1>Welcher Festival-Typ passt zu dir?</h1>
-          </div>
-          <div className="header-actions">
-            <button className="ghost-button" onClick={() => setState(initialState)} type="button">
+        {state.screen !== "attract" ?
+          <header className="app-header">
+            <div className="brand-block">
+              <p className="eyebrow">Musik & Tanz in Bayern</p>
+              <h1>Welcher Bayern-Typ bist du?</h1>
+            </div>
+            <button className="ghost-button" onClick={resetToAttract} type="button">
               Reset
             </button>
-          </div>
-        </header>
+          </header>
+        : null}
 
-        {state.screen === 'intro' ? (
-          <section className="hero-card">
-            <div className="hero-copy">
-              <div className="badge-row">
-                <span className="badge">5 Fragen</span>
-                <span className="badge">4 Festival-Typen</span>
-                <span className="badge">4 Regionen in Bayern</span>
-              </div>
-              <div className="hero-copy-main">
-                <h2>
-                  Dein Festival-Vibe.
-                  <br />
-                  Dein Bayern-Match.
-                </h2>
-                <p className="lead">
-                  Finde in wenigen Schritten heraus, welcher Festival-Typ du bist und welche Region in Bayern zu dir passt.
-                </p>
-              </div>
-              <div className="cta-row intro-actions">
-                <p className="hint">Schnell, spielerisch und mit einem klaren Match fuer deinen Festival-Charakter.</p>
-                <button className="primary-button" onClick={startQuiz} type="button">
-                  Quiz starten
-                </button>
-              </div>
+        {state.screen === "attract" ?
+          <button className="attract-screen" onClick={goToStart} type="button">
+            <div className="campaign-loop" aria-hidden="true">
+              <span className="loop-line loop-line-one" />
+              <span className="loop-line loop-line-two" />
+              <span className="loop-line loop-line-three" />
+              <span className="loop-pulse" />
             </div>
+            <div className="attract-copy">
+              <p className="eyebrow">Bayern gehört erlebt</p>
+              <h2>Musik. Tanz. Festival-Vibes.</h2>
+              <span className="pulse-button">Tippen zum Starten</span>
+            </div>
+          </button>
+        : null}
 
-            <div className="hero-sidepanel">
-              <div className="hero-sidepanel-head">
-                <p className="eyebrow">Typen im Schnellblick</p>
-                <p className="panel-copy">Jede Auswertung kombiniert Festival-Persoenlichkeit mit einer passenden Region in Bayern.</p>
-              </div>
-              <div className="type-preview-grid">
-                {Object.values(festivalTypes).map((type) => (
-                  <article className="mini-type-card" key={type.id}>
-                    <strong>{type.title}</strong>
-                    <span>{type.subtitle}</span>
-                  </article>
-                ))}
-              </div>
+        {state.screen === "start" ?
+          <section className="start-screen">
+            <div className="start-copy">
+              <p className="eyebrow">60-Sekunden-Quiz</p>
+              <h2>Du feierst hier - aber welcher Bayern-Vibe steckt wirklich in dir?</h2>
+              <p>Mach das 60-Sekunden-Quiz & finde heraus, welcher Bayern-Typ du bist!</p>
+              <strong>Laut. Echt. Bayerisch.</strong>
             </div>
+            <button className="primary-button start-button" onClick={startQuiz} type="button">
+              okaaay let's go!
+            </button>
           </section>
-        ) : null}
+        : null}
 
-        {state.screen === 'quiz' && currentQuestion ? (
-          <section className="question-card">
+        {state.screen === "quiz" && currentQuestion ?
+          <section className="question-screen">
             <div className="question-header-panel">
               <div className="question-topline">
-                <span>{currentQuestion.kicker}</span>
-                <span>{progress}% abgeschlossen</span>
+                <span>Frage {state.currentQuestion + 1}/5</span>
+                <span>{progress}%</span>
               </div>
               <div className="progress-bar" aria-hidden="true">
                 <div className="progress-bar-fill" style={{ width: `${progress}%` }} />
               </div>
               <h2>{currentQuestion.prompt}</h2>
-              <p className="question-support">
-                Waehle die Antwort, die deinem Gefuehl auf einem Event am naechsten kommt.
-              </p>
-
               <div className="footer-row">
                 <button className="secondary-button" onClick={goBack} type="button">
-                  Zurueck
+                  Zurück
                 </button>
-                <p>
-                  Frage {state.currentQuestion + 1} von {totalQuestions}
-                </p>
+                <p>Antwort antippen, nächste Frage kommt automatisch.</p>
               </div>
             </div>
 
             <div className="answers-grid">
               {currentQuestion.answers.map((answer, answerIndex) => (
                 <button
-                  className="answer-card"
-                  key={answer.label}
+                  className={`answer-card${activeAnswerIndex === answerIndex ? " is-selected" : ""}`}
+                  disabled={activeAnswerIndex !== null}
+                  key={answer.option}
                   onClick={() => chooseAnswer(answerIndex)}
                   type="button"
                 >
-                  <span className="answer-index">0{answerIndex + 1}</span>
-                  <strong>{answer.detail}</strong>
-                  <span>{answer.label}</span>
+                  <span className="answer-index">{answer.option}</span>
+                  <strong>{answer.label}</strong>
                 </button>
               ))}
             </div>
           </section>
-        ) : null}
+        : null}
 
-        {state.screen === 'result' && result ? (
-          <section className="result-layout">
-            <article className="result-card result-card-primary">
-              <p className="eyebrow">Dein Festival-Typ</p>
-              <h2>{result.type.title}</h2>
-              <p className="result-subtitle">{result.type.subtitle}</p>
-              <p>{result.type.description}</p>
-            </article>
-
-            <article className="result-card result-card-secondary">
-              <p className="eyebrow">Deine Bayern-Region</p>
-              <h2>{result.region.title}</h2>
-              <p className="result-subtitle">{result.region.subtitle}</p>
-              <p>{result.region.description}</p>
-            </article>
-
-            <div className="cta-row result-actions">
-              <button className="primary-button" onClick={startQuiz} type="button">
-                Nochmal spielen
-              </button>
-              <button className="secondary-button" onClick={() => setState(initialState)} type="button">
-                Zur Startseite
-              </button>
-            </div>
+        {state.screen === "calculating" ?
+          <section className="calculation-screen" aria-live="polite">
+            <div className="spinner" aria-hidden="true" />
+            <h2>Dein Bayern-Vibe wird ermittelt...</h2>
           </section>
-        ) : null}
+        : null}
+
+        {state.screen === "result" && result ?
+          <section className="result-screen" style={{ background: result.backdrop }}>
+            <article className="result-copy">
+              <p className="eyebrow">Dein Bayern-Typ</p>
+              <h2>{result.region}</h2>
+              <h3>{result.title}</h3>
+              <p className="result-vibe">Dein Vibe: {result.vibe}</p>
+              <p>{result.description}</p>
+            </article>
+
+            <aside className="qr-panel">
+              <QRCodeSVG aria-label={`QR-Code: ${result.guideLabel}`} includeMargin level="M" size={240} value={result.guideUrl} />
+              <p>{result.guideLabel}</p>
+              <a className="primary-button" href={result.guideUrl} rel="noreferrer" target="_blank">
+                {result.cta}
+              </a>
+              <p className="scan-copy">Scannen und deinen Bayern-Typ erleben!</p>
+              {resultScores ?
+                <dl className="score-list" aria-label="Punktestand">
+                  {Object.entries(resultScores).map(([id, score]) => (
+                    <div key={id}>
+                      <dt>{results[id as BayernTypeId].region}</dt>
+                      <dd>{score}</dd>
+                    </div>
+                  ))}
+                </dl>
+              : null}
+              <button className="secondary-button" onClick={startQuiz} type="button">
+                Quiz neu starten
+              </button>
+            </aside>
+          </section>
+        : null}
       </section>
     </main>
-  )
+  );
 }

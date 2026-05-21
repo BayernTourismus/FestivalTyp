@@ -1,252 +1,194 @@
-export type FestivalTypeId = 'alpenrausch' | 'seensucht' | 'cityflow' | 'waldrausch'
-export type RegionId = 'allgaeu' | 'seenland' | 'staedte' | 'bayerischer-wald'
+export type BayernTypeId = "franken" | "oberbayern" | "ostbayern" | "allgaeu-bayerisch-schwaben";
 
 export type ResultMeta = {
-  id: FestivalTypeId | RegionId
-  title: string
-  subtitle: string
-  description: string
-  color: string
-}
+  id: BayernTypeId;
+  title: string;
+  region: string;
+  vibe: string;
+  description: string;
+  cta: string;
+  guideLabel: string;
+  guideUrl: string;
+  color: string;
+  accent: string;
+  backdrop: string;
+};
 
 export type Answer = {
-  label: string
-  detail: string
-  typeScores: Partial<Record<FestivalTypeId, number>>
-  regionScores: Partial<Record<RegionId, number>>
-}
+  option: "A" | "B" | "C" | "D";
+  label: string;
+  resultId: BayernTypeId;
+};
 
 export type Question = {
-  id: string
-  prompt: string
-  kicker: string
-  answers: Answer[]
-}
+  id: string;
+  prompt: string;
+  answers: Answer[];
+};
 
-export const festivalTypes: Record<FestivalTypeId, ResultMeta> = {
-  alpenrausch: {
-    id: 'alpenrausch',
-    title: 'Alpenrausch',
-    subtitle: 'Große Gefühle, klare Luft und Aussicht mit Nachhall.',
-    description:
-      'Heute tanzt du im Bass, morgen stehst du am Gipfel. Du suchst Intensität, Freiheit und diese Momente, die lange bleiben.',
-    color: '#2d63b8'
-  },
-  seensucht: {
-    id: 'seensucht',
-    title: 'Seensucht',
-    subtitle: 'Wasser, Weite und gute Vibes nach einer langen Nacht.',
-    description:
-      'Du brauchst Sonne auf der Haut, einen Steg am Wasser und genug Leichtigkeit, um Festival-Ekstase in Erholung zu verwandeln.',
-    color: '#2f8db7'
-  },
-  cityflow: {
-    id: 'cityflow',
-    title: 'Cityflow',
-    subtitle: 'Urban, schnell und immer auf der Suche nach dem nächsten Spot.',
-    description:
-      'Tagsüber Coffee Spots, nachts Clubs. Du magst Kontraste, Szenegefühl und Orte, an denen immer noch ein zweiter Abend wartet.',
-    color: '#6d52c8'
-  },
-  waldrausch: {
-    id: 'waldrausch',
-    title: 'Waldrausch',
-    subtitle: 'Deep, erdend und am liebsten mit Natur als Gegenpol.',
-    description:
-      'Du liebst intensive Nächte, brauchst aber Wald, Ruhe und Weite zum Auftanken. Nebel über Baumwipfeln schlägt Großstadtlärm.',
-    color: '#2f7a61'
-  }
-}
+export const resultOrder: BayernTypeId[] = ["franken", "oberbayern", "ostbayern", "allgaeu-bayerisch-schwaben"];
 
-export const regions: Record<RegionId, ResultMeta> = {
-  allgaeu: {
-    id: 'allgaeu',
-    title: 'Allgäu & Alpenrand',
-    subtitle: 'Für freie Köpfe, Höhenluft und ein Wochenende mit Weitblick.',
+export const results: Record<BayernTypeId, ResultMeta> = {
+  "franken": {
+    id: "franken",
+    title: "Der Kultur-Genießer",
+    region: "Franken",
+    vibe: "Stilvoll. Intensiv. Charakterstark.",
     description:
-      'Dein Match liegt zwischen Bergen, klaren Seen und dem Gefühl, sofort draußen und weit weg zu sein.',
-    color: '#3a79d0'
+      "Du feierst am liebsten da, wo Geschichte auf moderne Beats trifft. Zwischen Weinbergen, historischen Mauern und kreativen Bühnen fühlst du dich zuhause. Für dich ist Musik mehr als Sound - sie ist echte Atmosphäre. Genau dieses Gefühl erwartet dich in Franken! Hier verbindet sich Indie- und Jazz-Kultur mit urbanem Altstadt-Flair und regionaler Kulinarik. Tagsüber durch charmante Gassen schlendern, abends mit einem Glas Silvaner bei einem Open-Air im Schlossgraben tanzen. Entdecke ein Bayern, das kreativ, genussvoll und einzigartig ist. Dein Bayern klingt nach Charakter.",
+    cta: "Jetzt Franken entdecken",
+    guideLabel: "Digitaler Reiseführer zur Urlaubsregion Franken",
+    guideUrl: "https://www.erlebe.bayern/regionen/franken/",
+    color: "#8a3f6f",
+    accent: "#f0b84a",
+    backdrop:
+      "linear-gradient(135deg, rgba(138, 63, 111, 0.95), rgba(184, 74, 83, 0.82)), radial-gradient(circle at 74% 16%, rgba(240, 184, 74, 0.72), transparent 31%)",
   },
-  seenland: {
-    id: 'seenland',
-    title: 'Bayerns Seen',
-    subtitle: 'Sonnenuntergang, Badesteg und Recovery mit Aussicht.',
+  "oberbayern": {
+    id: "oberbayern",
+    title: "Der Panorama-Performer",
+    region: "Oberbayern",
+    vibe: "Emotional. Gesellig. Grenzenlos.",
     description:
-      'Chiemsee, Starnberger See oder Fränkisches Seenland passen zu dir, wenn dein perfekter Ausklang leicht, offen und wassernahe ist.',
-    color: '#2f9abf'
+      "Du liebst große Gefühle - am liebsten mit See- oder Bergblick. Musik ist für dich Gemeinschaft: mitsingen, mittanzen, mitfühlen. In Oberbayern findest du genau diese Energie. Hier trifft moderne Brass-Musik auf DJ-Beats, und gelebte Tradition wird zur fetten Party. Erst Gipfelglück oder Stand-Up-Paddling auf dem See, danach mit der Crew in den Biergarten oder aufs nächste große Open-Air. Dein Bayern feiert das Leben, die Freundschaft und die perfekte Kulisse.",
+    cta: "Jetzt Oberbayern erleben",
+    guideLabel: "Digitaler Reiseführer zur Urlaubsregion Oberbayern",
+    guideUrl: "https://www.erlebe.bayern/regionen/oberbayern/",
+    color: "#0050a0",
+    accent: "#6ec1e4",
+    backdrop:
+      "linear-gradient(135deg, rgba(0, 80, 160, 0.94), rgba(30, 132, 165, 0.82)), radial-gradient(circle at 78% 18%, rgba(255, 255, 255, 0.66), transparent 28%)",
   },
-  staedte: {
-    id: 'staedte',
-    title: 'Bayerns Städte',
-    subtitle: 'Szene, Kultur und ein Flow zwischen Gassen, Bars und Rooftops.',
+  "ostbayern": {
+    id: "ostbayern",
+    title: "Der Natur-Freigeist",
+    region: "Ostbayern",
+    vibe: "Echt. Geerdet. Frei.",
     description:
-      'München, Nürnberg, Würzburg oder Regensburg passen zu dir, wenn du Energie, Stil und urbane Kontraste suchst.',
-    color: '#7a5ad2'
+      "Du feierst am liebsten unter freiem Himmel - wo Musik und Natur eins werden. Ostbayern ist genau dein Ding: Wälder, Flüsse, echte Begegnungen. Kleine Bühnen, große Emotionen. Zwischen dem Nationalpark Bayerischer Wald und wilden Flusslandschaften gibt es kleine, entschleunigte Festivals und kulturelle Geheimtipps zu entdecken. Tagsüber radelst du durch tiefe Wälder, abends sitzt du bei Akustik-Sounds und guten Gesprächen unterm Sternenhimmel. Dein Bayern ist ein Ort zum Durchatmen.",
+    cta: "Jetzt Ostbayern erleben",
+    guideLabel: "Digitaler Reiseführer zur Urlaubsregion Ostbayern",
+    guideUrl: "https://www.erlebe.bayern/regionen/ostbayern/",
+    color: "#25664d",
+    accent: "#91c46c",
+    backdrop:
+      "linear-gradient(135deg, rgba(37, 102, 77, 0.95), rgba(33, 83, 103, 0.86)), radial-gradient(circle at 78% 18%, rgba(145, 196, 108, 0.68), transparent 30%)",
   },
-  'bayerischer-wald': {
-    id: 'bayerischer-wald',
-    title: 'Bayerischer Wald',
-    subtitle: 'Natur, Tiefe und ein bisschen Mystik nach dem Bass.',
+  "allgaeu-bayerisch-schwaben": {
+    id: "allgaeu-bayerisch-schwaben",
+    title: "Der Gipfel-Stürmer",
+    region: "Allgäu / Bayerisch Schwaben",
+    vibe: "Laut. Organisiert. Energiegeladen.",
     description:
-      'Hier passt du hin, wenn dein ideales Festival-Wochenende auch Raum für Waldwege, Nebel und echte Entschleunigung braucht.',
-    color: '#31735e'
-  }
-}
+      "Du brauchst treibende Beats im Bauch und den perfekten Flow! Langes Rumstehen ist nichts für dich - du navigierst clever durchs Leben und bleibst immer in Bewegung. Willkommen im Allgäu und Bayerisch Schwaben! Hier verschmelzen Outdoor-Action, Rad- und Flusslandschaften und junge Event-Kultur. Ob Extremsport-Festival oder Open-Airs im Tal - hier pusht dich die Natur ans Limit. Dein Bayern ist sportlich, smart und voller Drive!",
+    cta: "Jetzt Allgäu/Bayerisch Schwaben erleben",
+    guideLabel: "Die Urlaubsregion Allgäu/Bayerisch-Schwaben",
+    guideUrl: "https://www.erlebe.bayern/regionen/allgaeu-bayerisch-schwaben/",
+    color: "#c04e24",
+    accent: "#ffc857",
+    backdrop:
+      "linear-gradient(135deg, rgba(192, 78, 36, 0.96), rgba(130, 66, 143, 0.78)), radial-gradient(circle at 78% 18%, rgba(255, 200, 87, 0.68), transparent 29%)",
+  },
+};
 
 export const questions: Question[] = [
   {
-    id: 'sunday',
-    kicker: 'Frage 1',
-    prompt: 'Dein perfekter Sonntag nach dem Festival?',
+    id: "festival-spot",
+    prompt: "Dein perfekter Festival-Spot sieht so aus ...",
     answers: [
-      {
-        label: 'Ab an den See. Ruhe, Sonne, einfach treiben lassen.',
-        detail: 'See statt Stress',
-        typeScores: { seensucht: 3 },
-        regionScores: { seenland: 3 }
-      },
-      {
-        label: 'City-Brunch, später Rooftop-Bar und noch ein bisschen weiterziehen.',
-        detail: 'Stadt zieht weiter',
-        typeScores: { cityflow: 3 },
-        regionScores: { staedte: 3 }
-      },
-      {
-        label: 'Wanderschuhe an und rauf auf einen Gipfel mit Aussicht.',
-        detail: 'Höhe statt Kater',
-        typeScores: { alpenrausch: 3 },
-        regionScores: { allgaeu: 3 }
-      },
-      {
-        label: 'Mit Freunden durch kleine Gassen oder Waldwege treiben lassen.',
-        detail: 'Leise weiterfühlen',
-        typeScores: { waldrausch: 2, seensucht: 1 },
-        regionScores: { 'bayerischer-wald': 2, staedte: 1 }
-      }
-    ]
+      { option: "A", label: "Bühne zwischen historischen Mauern oder Weinbergen", resultId: "franken" },
+      { option: "B", label: "Vor der Bühne mit Seepanorama", resultId: "oberbayern" },
+      { option: "C", label: "Lichtung im Wald oder am Fluss", resultId: "ostbayern" },
+      { option: "D", label: "Open-Air vor Alpenkulisse", resultId: "allgaeu-bayerisch-schwaben" },
+    ],
   },
   {
-    id: 'sound',
-    kicker: 'Frage 2',
-    prompt: 'Welcher Sound-Vibe passt heute zu dir?',
+    id: "crew-role",
+    prompt: "Wenn du mit deiner Crew auf dem Festival unterwegs bist - welche Rolle übernimmst du?",
     answers: [
       {
-        label: 'Deep und atmosphärisch, eher Sog als Show.',
-        detail: 'Tief rein',
-        typeScores: { waldrausch: 3 },
-        regionScores: { 'bayerischer-wald': 3 }
+        option: "A",
+        label: "Der/Die Organisator:in: Du hast das Line-up studiert und kennst die ästhetischsten Bühnen und besten Food-Spots",
+        resultId: "franken",
       },
       {
-        label: 'Urban Pop und Hip-Hop mit Druck nach vorne.',
-        detail: 'City auf laut',
-        typeScores: { cityflow: 3 },
-        regionScores: { staedte: 3 }
+        option: "B",
+        label: "Der/Die Stimmungsmacher:in: Du bringst alle zusammen, besorgst die nächste Runde und startest den Gesang",
+        resultId: "oberbayern",
       },
       {
-        label: 'Indie, Alternative oder Singer-Songwriter mit Weite.',
-        detail: 'Frei und offen',
-        typeScores: { alpenrausch: 2, seensucht: 1 },
-        regionScores: { allgaeu: 2, seenland: 1 }
+        option: "C",
+        label: "Der/Die Entspannte: Du sorgst dafür, dass alle zwischendurch mal runterkommen und einen Platz im Schatten finden",
+        resultId: "ostbayern",
       },
       {
-        label: 'Party, Throwbacks und dieser eine Song, den alle mitgrölen.',
-        detail: 'Leicht und laut',
-        typeScores: { seensucht: 2, cityflow: 1 },
-        regionScores: { seenland: 2, staedte: 1 }
-      }
-    ]
+        option: "D",
+        label:
+          "Die treibende Kraft: Du kennst jeden Shortcut, teilst dir deine Energie perfekt ein und ziehst durch, wenn andere schon schlappmachen",
+        resultId: "allgaeu-bayerisch-schwaben",
+      },
+    ],
   },
   {
-    id: 'crew',
-    kicker: 'Frage 3',
-    prompt: 'Deine Crew beschreibt dich am ehesten als …',
+    id: "sound",
+    prompt: "Welcher Sound bringt dich sofort in Bewegung?",
     answers: [
-      {
-        label: 'freiheitsliebend und immer offen für den spontanen Abzweig',
-        detail: 'Freigeist',
-        typeScores: { alpenrausch: 3 },
-        regionScores: { allgaeu: 3 }
-      },
-      {
-        label: 'Trendsetter mit Gespür für neue Orte und gute Szenen',
-        detail: 'Vorne dabei',
-        typeScores: { cityflow: 3 },
-        regionScores: { staedte: 3 }
-      },
-      {
-        label: 'Naturmensch, der nach der Nacht wieder Luft braucht',
-        detail: 'Draußen zuhause',
-        typeScores: { waldrausch: 3 },
-        regionScores: { 'bayerischer-wald': 3 }
-      },
-      {
-        label: 'Genießer, der Stimmung, Menschen und den Moment sammelt',
-        detail: 'Vibes statt Hektik',
-        typeScores: { seensucht: 2, cityflow: 1 },
-        regionScores: { seenland: 2, staedte: 1 }
-      }
-    ]
+      { option: "A", label: "Indie, Jazz, kreative Crossover-Sounds", resultId: "franken" },
+      { option: "B", label: "Brass, Pop, oder 90s Throwbacks", resultId: "oberbayern" },
+      { option: "C", label: "Deep & Atmospheric", resultId: "ostbayern" },
+      { option: "D", label: "Electro, Rock, treibende Beats", resultId: "allgaeu-bayerisch-schwaben" },
+    ],
   },
   {
-    id: 'insta',
-    kicker: 'Frage 4',
-    prompt: 'Was wäre dein perfektes Motiv direkt nach dem Festival?',
+    id: "dance",
+    prompt: "Tanzen bedeutet für dich ...",
     answers: [
       {
-        label: 'Sonnenuntergang über Bergen',
-        detail: 'Horizont an',
-        typeScores: { alpenrausch: 3 },
-        regionScores: { allgaeu: 3 }
+        option: "A",
+        label: "Lebensgefühl - du saugst die Kultur des Ortes auf und lebst den Rhythmus",
+        resultId: "franken",
       },
       {
-        label: 'Street Art, Skyline und Licht von oben',
-        detail: 'Stadtbild mit Puls',
-        typeScores: { cityflow: 3 },
-        regionScores: { staedte: 3 }
+        option: "B",
+        label: "Gemeinschaft - Arm in Arm mit Freunden mitsingen, bis die Stimme weg ist",
+        resultId: "oberbayern",
       },
       {
-        label: 'Spiegelnder Bergsee oder ein stiller Steg am Wasser',
-        detail: 'Ruhe in Blau',
-        typeScores: { seensucht: 3 },
-        regionScores: { seenland: 3 }
+        option: "C",
+        label: "Freiheit - Augen zu, barfuß im Gras, einfach im Moment treiben lassen",
+        resultId: "ostbayern",
       },
       {
-        label: 'Waldkante, Nebel und ein Weg, der einfach weiterführt',
-        detail: 'Mystisch raus',
-        typeScores: { waldrausch: 3 },
-        regionScores: { 'bayerischer-wald': 3 }
-      }
-    ]
+        option: "D",
+        label: "Power - Bass im Bauch, springen, schwitzen, alles geben",
+        resultId: "allgaeu-bayerisch-schwaben",
+      },
+    ],
   },
   {
-    id: 'recovery',
-    kicker: 'Frage 5',
-    prompt: 'Wie klingt für dich das beste Festival-Recovery-Wochenende?',
+    id: "afterglow",
+    prompt: "Der Festival-Afterglow: Dein perfekter Urlaubs-Moment nach dem Festival ...",
     answers: [
       {
-        label: 'Wellness, klare Luft und ein Zimmer mit Bergblick',
-        detail: 'Runterkommen mit Aussicht',
-        typeScores: { alpenrausch: 2, seensucht: 1 },
-        regionScores: { allgaeu: 3 }
+        option: "A",
+        label: "Altstadt-Flair genießen, Streetfood probieren und mit einem Glas Wein auf den Sonnenuntergang anstoßen",
+        resultId: "franken",
       },
       {
-        label: 'Badesee, Sonnenuntergang und tagsüber einfach nichts müssen',
-        detail: 'Recovery am Wasser',
-        typeScores: { seensucht: 3 },
-        regionScores: { seenland: 3 }
+        option: "B",
+        label: "Morgens ab in den See, nachmittags auf die Alm und abends in den Biergarten",
+        resultId: "oberbayern",
       },
       {
-        label: 'Noch einen Tag Stadtgefühl: Kaffee, Kultur, später Drinks',
-        detail: 'Das Wochenende weiterziehen',
-        typeScores: { cityflow: 3 },
-        regionScores: { staedte: 3 }
+        option: "C",
+        label: "Raus aus dem Trubel: Yoga im Grünen oder Spaziergang im Wald",
+        resultId: "ostbayern",
       },
       {
-        label: 'Vanlife, Wald und endlich wieder tief durchatmen',
-        detail: 'Leiser, aber nicht langweilig',
-        typeScores: { waldrausch: 3 },
-        regionScores: { 'bayerischer-wald': 3 }
-      }
-    ]
-  }
-]
+        option: "D",
+        label: "Früh raus, auf den Gipfel hiken, Paragliding oder den nächsten steilen Bike-Trail shredden",
+        resultId: "allgaeu-bayerisch-schwaben",
+      },
+    ],
+  },
+];

@@ -1,6 +1,6 @@
 # FestivalTyp Quiz Demo
 
-Kleine offline-faehige PWA-Demo fuer ein Event-Tablet. Die App laeuft als statische Vite/React-Anwendung und kann direkt bei Vercel deployed werden.
+Offline-faehige PWA-Demo fuer ein Festival-Tablet. Die App laeuft als statische Vite/React-Anwendung und kann direkt bei Vercel deployed werden.
 
 ## Lokal starten
 
@@ -34,14 +34,18 @@ Danach ist die Demo direkt erreichbar.
 
 ## Demo-Inhalt anpassen
 
-- Fragen und Antworten: `src/data/quiz.ts`
-- Quiz-Logik und Scoring: `src/lib/scoring.ts`
+- Fragen, Antworten, Ergebnis-Texte und Guide-Links: `src/data/quiz.ts`
+- Quiz-Logik, A-D-Scoring und Randomizer bei Gleichstand: `src/lib/scoring.ts`
 - Layout und Farben: `src/styles/app.css`
 
 ## Aktueller Umfang
 
-- 5 Demo-Fragen
-- Auswertung fuer 4 Festival-Typen
-- Zuordnung zu 4 Bayern-Regionen
+- Attract-Loop mit Start-CTA
+- 5 Fragen mit je 4 Antworten
+- Auswertung fuer 4 Bayern-Typen nach A-D-Punktesystem
+- Randomizer bei Gleichstand
+- Calculation Screen vor dem Ergebnis
+- Offline gerenderter QR-Code und Link-Panel fuer regionale Reisefuehrer
 - Offline-Cache per Service Worker
-- Auto-Reset nach 45 Sekunden Inaktivitaet
+- Auto-Reset nach 30 Sekunden Inaktivitaet, auf dem Ergebnis-Screen nach 120 Sekunden
+- Lokale Analytics-Zaehler fuer Starts, Abbrueche, Abschluesse und Ergebnisverteilung
