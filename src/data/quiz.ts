@@ -67,29 +67,29 @@ export const languageLabels: Record<QuizLanguage, string> = {
 export const resultOrder: BayernTypeId[] = ["franken", "oberbayern", "ostbayern", "allgaeu-bayerisch-schwaben"];
 
 const resultStyles: Record<BayernTypeId, Pick<ResultMeta, "color" | "accent" | "backdrop" | "guideUrl">> = {
-  franken: {
-    guideUrl: "https://www.erlebe.bayern/regionen/franken/",
+  "franken": {
+    guideUrl: "https://erlebe.bayern/guide/franken/",
     color: "#8a3f6f",
     accent: "#f0b84a",
     backdrop:
       "linear-gradient(135deg, rgba(138, 63, 111, 0.95), rgba(184, 74, 83, 0.82)), radial-gradient(circle at 74% 16%, rgba(240, 184, 74, 0.72), transparent 31%)",
   },
-  oberbayern: {
-    guideUrl: "https://www.erlebe.bayern/regionen/oberbayern/",
+  "oberbayern": {
+    guideUrl: "https://erlebe.bayern/guide/oberbayern/",
     color: "#0050a0",
     accent: "#6ec1e4",
     backdrop:
       "linear-gradient(135deg, rgba(0, 80, 160, 0.94), rgba(30, 132, 165, 0.82)), radial-gradient(circle at 78% 18%, rgba(255, 255, 255, 0.66), transparent 28%)",
   },
-  ostbayern: {
-    guideUrl: "https://www.erlebe.bayern/regionen/ostbayern/",
+  "ostbayern": {
+    guideUrl: "https://erlebe.bayern/guide/ostbayern/",
     color: "#25664d",
     accent: "#91c46c",
     backdrop:
       "linear-gradient(135deg, rgba(37, 102, 77, 0.95), rgba(33, 83, 103, 0.86)), radial-gradient(circle at 78% 18%, rgba(145, 196, 108, 0.68), transparent 30%)",
   },
   "allgaeu-bayerisch-schwaben": {
-    guideUrl: "https://www.erlebe.bayern/regionen/allgaeu-bayerisch-schwaben/",
+    guideUrl: "https://erlebe.bayern/guide/allgaeu-bayerisch-schwaben/",
     color: "#c04e24",
     accent: "#ffc857",
     backdrop:
@@ -259,7 +259,7 @@ export const quizContent: Record<QuizLanguage, QuizContent> = {
       },
     ],
     results: {
-      franken: withStyle({
+      "franken": withStyle({
         id: "franken",
         title: "Der Kultur-Genießer",
         region: "Franken",
@@ -269,7 +269,7 @@ export const quizContent: Record<QuizLanguage, QuizContent> = {
         cta: "Jetzt Franken entdecken",
         guideLabel: "Digitaler Reiseführer zur Urlaubsregion Franken",
       }),
-      oberbayern: withStyle({
+      "oberbayern": withStyle({
         id: "oberbayern",
         title: "Der Panorama-Performer",
         region: "Oberbayern",
@@ -279,7 +279,7 @@ export const quizContent: Record<QuizLanguage, QuizContent> = {
         cta: "Jetzt Oberbayern erleben",
         guideLabel: "Digitaler Reiseführer zur Urlaubsregion Oberbayern",
       }),
-      ostbayern: withStyle({
+      "ostbayern": withStyle({
         id: "ostbayern",
         title: "Der Natur-Freigeist",
         region: "Ostbayern",
@@ -457,7 +457,7 @@ export const quizContent: Record<QuizLanguage, QuizContent> = {
       },
     ],
     results: {
-      franken: withStyle({
+      "franken": withStyle({
         id: "franken",
         title: "The Culture Connoisseur",
         region: "Franconia",
@@ -467,7 +467,7 @@ export const quizContent: Record<QuizLanguage, QuizContent> = {
         cta: "Discover Franconia now",
         guideLabel: "Digital travel guide for the Franconia vacation region",
       }),
-      oberbayern: withStyle({
+      "oberbayern": withStyle({
         id: "oberbayern",
         title: "The Panorama Performer",
         region: "Upper Bavaria",
@@ -477,7 +477,7 @@ export const quizContent: Record<QuizLanguage, QuizContent> = {
         cta: "Experience Upper Bavaria now",
         guideLabel: "Digital travel guide for the Upper Bavaria vacation region",
       }),
-      ostbayern: withStyle({
+      "ostbayern": withStyle({
         id: "ostbayern",
         title: "The Nature Free Spirit",
         region: "Eastern Bavaria",
