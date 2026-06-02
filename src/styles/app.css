@@ -1,3 +1,63 @@
+@font-face {
+  font-family: "Museo Sans";
+  src:
+    url("../fonts/museo-sans-300.woff2") format("woff2"),
+    url("../fonts/museo-sans-300.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Museo Sans";
+  src:
+    url("../fonts/museo-sans-500.woff2") format("woff2"),
+    url("../fonts/museo-sans-500.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Museo Sans";
+  src:
+    url("../fonts/museo-sans-700.woff2") format("woff2"),
+    url("../fonts/museo-sans-700.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Museo Slab";
+  src:
+    url("../fonts/museo-slab-300.woff2") format("woff2"),
+    url("../fonts/museo-slab-300.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Museo Slab";
+  src:
+    url("../fonts/museo-slab-500.woff2") format("woff2"),
+    url("../fonts/museo-slab-500.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Museo Slab";
+  src:
+    url("../fonts/museo-slab-700.woff2") format("woff2"),
+    url("../fonts/museo-slab-700.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --bayern-blue: #0050a0;
   --bayern-sky: #75b7dc;
@@ -182,7 +242,7 @@ span {
   background: transparent;
   color: var(--bayern-blue);
   font-size: 0.88rem;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .language-switch button.is-active {
@@ -203,7 +263,7 @@ span {
   letter-spacing: 0.14em;
   color: var(--bayern-blue);
   font-size: 0.78rem;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 h1,
@@ -211,6 +271,7 @@ h2,
 h3 {
   margin: 0;
   font-family: var(--headline-font);
+  font-weight: 700;
   color: var(--bayern-blue);
   line-height: 0.98;
 }
@@ -326,7 +387,7 @@ h3 {
   background: white;
   color: var(--bayern-blue);
   font-size: clamp(1.35rem, 2vw, 1.8rem);
-  font-weight: 900;
+  font-weight: 700;
   box-shadow: 0 20px 44px rgba(0, 0, 0, 0.22);
   animation: pulseButton 1.6s ease-in-out infinite;
 }
@@ -393,7 +454,7 @@ h3 {
   border: 0;
   border-radius: 999px;
   cursor: pointer;
-  font-weight: 900;
+  font-weight: 700;
   text-decoration: none;
   transition:
     transform 140ms ease,
@@ -456,7 +517,7 @@ h3 {
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-size: 0.78rem;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .progress-bar {
@@ -536,7 +597,7 @@ h3 {
   border-radius: 50%;
   background: var(--bayern-blue);
   color: white;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .answer-card strong {
@@ -612,7 +673,7 @@ h3 {
 }
 
 .result-vibe {
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .qr-panel {
@@ -646,7 +707,7 @@ h3 {
 .scan-copy {
   color: var(--bayern-blue) !important;
   font-size: clamp(1.1rem, 1.5vw, 1.45rem);
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .qr-result-region {
