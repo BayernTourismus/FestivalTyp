@@ -37,6 +37,7 @@ Danach ist die Demo direkt erreichbar.
 - Fragen, Antworten, Ergebnis-Texte und Guide-Links: `src/data/quiz.ts`
 - Quiz-Logik, A-D-Scoring und Randomizer bei Gleichstand: `src/lib/scoring.ts`
 - Layout und Farben: `src/styles/app.css`
+- Kampagnenvideo fuer den Startscreen: `public/bayern-gehoert-erlebt.mp4`
 
 ## Aktueller Umfang
 

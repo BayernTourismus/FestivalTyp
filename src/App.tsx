@@ -1,10 +1,11 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { QRCodeSVG } from "qrcode.react";
 import { questions, results, type BayernTypeId } from "./data/quiz";
-import { evaluateQuiz, totalQuestions, type ScoreMap } from "./lib/scoring";
+import { evaluateQuiz, totalQuestions } from "./lib/scoring";
 
 const STORAGE_KEY = "festivaltyp-state-v2";
 const ANALYTICS_KEY = "festivaltyp-analytics-v1";
+const CAMPAIGN_VIDEO_SRC = "/bayern-gehoert-erlebt.mp4";
 const IDLE_TIMEOUT_MS = 30_000;
 const RESULT_TIMEOUT_MS = 120_000;
 const ANSWER_FEEDBACK_MS = 220;
@@ -163,13 +164,6 @@ export default function App() {
   const currentQuestion = questions[state.currentQuestion];
   const result = state.resultId ? results[state.resultId] : null;
   const progress = Math.round((state.currentQuestion / totalQuestions) * 100);
-  const resultScores = useMemo<ScoreMap | null>(() => {
-    if (state.resultId || state.selectedAnswers.length === totalQuestions) {
-      return evaluateQuiz(state.selectedAnswers).scores;
-    }
-
-    return null;
-  }, [state.resultId, state.selectedAnswers]);
 
   const goToStart = () => {
     setState({ ...initialState, screen: "start" });
@@ -253,6 +247,9 @@ export default function App() {
 
         {state.screen === "attract" ?
           <button className="attract-screen" onClick={goToStart} type="button">
+            <video className="campaign-video" aria-hidden="true" autoPlay loop muted playsInline preload="auto">
+              <source src={CAMPAIGN_VIDEO_SRC} type="video/mp4" />
+            </video>
             <div className="campaign-loop" aria-hidden="true">
               <span className="loop-line loop-line-one" />
               <span className="loop-line loop-line-two" />
@@ -335,24 +332,15 @@ export default function App() {
             </article>
 
             <aside className="qr-panel">
+              <p className="scan-copy">Scannen und deinen Bayern-Typ erleben!</p>
               <QRCodeSVG aria-label={`QR-Code: ${result.guideLabel}`} includeMargin level="M" size={240} value={result.guideUrl} />
+              <h3 className="qr-result-region">{result.region}</h3>
               <p>{result.guideLabel}</p>
               <a className="primary-button" href={result.guideUrl} rel="noreferrer" target="_blank">
                 {result.cta}
               </a>
-              <p className="scan-copy">Scannen und deinen Bayern-Typ erleben!</p>
-              {resultScores ?
-                <dl className="score-list" aria-label="Punktestand">
-                  {Object.entries(resultScores).map(([id, score]) => (
-                    <div key={id}>
-                      <dt>{results[id as BayernTypeId].region}</dt>
-                      <dd>{score}</dd>
-                    </div>
-                  ))}
-                </dl>
-              : null}
-              <button className="secondary-button" onClick={startQuiz} type="button">
-                Quiz neu starten
+              <button className="secondary-button" onClick={resetToAttract} type="button">
+                Zur Startseite
               </button>
             </aside>
           </section>

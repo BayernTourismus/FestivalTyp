@@ -187,6 +187,23 @@ h3 {
     radial-gradient(circle at 78% 18%, rgba(240, 184, 74, 0.88), transparent 30%), #0050a0;
 }
 
+.campaign-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.attract-screen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(0, 40, 85, 0.48), rgba(0, 80, 160, 0.08) 58%, rgba(0, 40, 85, 0.24));
+  pointer-events: none;
+}
+
 .campaign-loop,
 .campaign-loop span {
   position: absolute;
@@ -195,6 +212,7 @@ h3 {
 .campaign-loop {
   inset: 0;
   overflow: hidden;
+  opacity: 0.58;
 }
 
 .loop-line {
@@ -234,6 +252,7 @@ h3 {
 
 .attract-copy {
   position: absolute;
+  z-index: 1;
   left: clamp(28px, 7vw, 92px);
   bottom: clamp(28px, 8vw, 88px);
   max-width: 760px;
@@ -581,36 +600,15 @@ h3 {
 
 .scan-copy {
   color: var(--bayern-blue) !important;
+  font-size: clamp(1.1rem, 1.5vw, 1.45rem);
   font-weight: 900;
 }
 
-.score-list {
-  width: 100%;
-  display: grid;
-  gap: 6px;
-  margin: 4px 0;
-  font-size: 0.82rem;
-}
-
-.score-list div {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-}
-
-.score-list dt,
-.score-list dd {
+.qr-result-region {
   margin: 0;
-}
-
-.score-list dt {
-  color: var(--bayern-muted);
-}
-
-.score-list dd {
   color: var(--bayern-blue);
-  font-weight: 900;
+  font-size: clamp(1.7rem, 2.6vw, 2.8rem);
+  line-height: 0.95;
 }
 
 @keyframes pulseButton {
