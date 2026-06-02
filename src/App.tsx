@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { QRCodeSVG } from "qrcode.react";
-import { questions, results, type BayernTypeId } from "./data/quiz";
-import { evaluateQuiz, totalQuestions } from "./lib/scoring";
+import { defaultLanguage, languageLabels, quizContent, type BayernTypeId, type QuizLanguage } from "./data/quiz";
+import { evaluateQuiz } from "./lib/scoring";
 
 const STORAGE_KEY = "festivaltyp-state-v2";
 const ANALYTICS_KEY = "festivaltyp-analytics-v1";
@@ -15,6 +15,7 @@ type Screen = "attract" | "start" | "quiz" | "calculating" | "result";
 
 type AppState = {
   screen: Screen;
+  language: QuizLanguage;
   currentQuestion: number;
   selectedAnswers: number[];
   resultId: BayernTypeId | null;
@@ -29,6 +30,7 @@ type AnalyticsState = {
 
 const initialState: AppState = {
   screen: "attract",
+  language: defaultLanguage,
   currentQuestion: 0,
   selectedAnswers: [],
   resultId: null,
@@ -61,14 +63,18 @@ const readJson = <T,>(key: string, fallback: T): T => {
 
 const readStoredState = (): AppState => {
   const parsed = readJson<Partial<AppState>>(STORAGE_KEY, initialState);
+  const language: QuizLanguage = parsed.language && parsed.language in quizContent ? parsed.language : defaultLanguage;
+  const content = quizContent[language];
+  const totalQuestions = content.questions.length;
   const screen: Screen =
     ["attract", "start", "quiz", "calculating", "result"].includes(parsed.screen ?? "") ? (parsed.screen as Screen) : "attract";
 
   return {
     screen,
+    language,
     currentQuestion: Math.min(Math.max(parsed.currentQuestion ?? 0, 0), totalQuestions - 1),
     selectedAnswers: Array.isArray(parsed.selectedAnswers) ? parsed.selectedAnswers.slice(0, totalQuestions) : [],
-    resultId: parsed.resultId && parsed.resultId in results ? parsed.resultId : null,
+    resultId: parsed.resultId && parsed.resultId in content.results ? parsed.resultId : null,
   };
 };
 
@@ -106,6 +112,9 @@ export default function App() {
   const [state, setState] = useState<AppState>(readStoredState);
   const [activeAnswerIndex, setActiveAnswerIndex] = useState<number | null>(null);
   const answerTimerRef = useRef<number | undefined>();
+  const content = quizContent[state.language];
+  const { copy, questions, results } = content;
+  const totalQuestions = questions.length;
 
   useEffect(() => {
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
@@ -126,7 +135,7 @@ export default function App() {
             recordAbandonment();
           }
           setActiveAnswerIndex(null);
-          setState(initialState);
+          setState({ ...initialState, language: state.language });
         },
         state.screen === "result" ? RESULT_TIMEOUT_MS : IDLE_TIMEOUT_MS,
       );
@@ -149,13 +158,13 @@ export default function App() {
     }
 
     const timeoutId = window.setTimeout(() => {
-      const evaluation = evaluateQuiz(state.selectedAnswers);
+      const evaluation = evaluateQuiz(state.selectedAnswers, questions);
       recordCompletion(evaluation.resultId);
       setState((current) => ({ ...current, screen: "result", resultId: evaluation.resultId }));
     }, CALCULATION_DELAY_MS);
 
     return () => window.clearTimeout(timeoutId);
-  }, [state.resultId, state.screen, state.selectedAnswers]);
+  }, [questions, state.resultId, state.screen, state.selectedAnswers, totalQuestions]);
 
   useEffect(() => {
     return () => window.clearTimeout(answerTimerRef.current);
@@ -165,8 +174,18 @@ export default function App() {
   const result = state.resultId ? results[state.resultId] : null;
   const progress = Math.round((state.currentQuestion / totalQuestions) * 100);
 
+  const changeLanguage = (language: QuizLanguage) => {
+    window.clearTimeout(answerTimerRef.current);
+    setActiveAnswerIndex(null);
+    setState((current) => ({
+      ...initialState,
+      language,
+      screen: current.screen === "attract" ? "attract" : "start",
+    }));
+  };
+
   const goToStart = () => {
-    setState({ ...initialState, screen: "start" });
+    setState({ ...initialState, language: state.language, screen: "start" });
   };
 
   const startQuiz = () => {
@@ -174,6 +193,7 @@ export default function App() {
     setActiveAnswerIndex(null);
     setState({
       screen: "quiz",
+      language: state.language,
       currentQuestion: 0,
       selectedAnswers: [],
       resultId: null,
@@ -183,7 +203,7 @@ export default function App() {
   const resetToAttract = () => {
     window.clearTimeout(answerTimerRef.current);
     setActiveAnswerIndex(null);
-    setState(initialState);
+    setState({ ...initialState, language: state.language });
   };
 
   const chooseAnswer = (answerIndex: number) => {
@@ -202,6 +222,7 @@ export default function App() {
       setActiveAnswerIndex(null);
       setState({
         screen: nextQuestion >= totalQuestions ? "calculating" : "quiz",
+        language: state.language,
         currentQuestion: Math.min(nextQuestion, totalQuestions - 1),
         selectedAnswers: nextAnswers,
         resultId: null,
@@ -211,13 +232,14 @@ export default function App() {
 
   const goBack = () => {
     if (state.currentQuestion === 0) {
-      setState({ ...initialState, screen: "start" });
+      setState({ ...initialState, language: state.language, screen: "start" });
       return;
     }
 
     setActiveAnswerIndex(null);
     setState((current) => ({
       screen: "quiz",
+      language: current.language,
       currentQuestion: current.currentQuestion - 1,
       selectedAnswers: current.selectedAnswers.slice(0, -1),
       resultId: null,
@@ -233,15 +255,46 @@ export default function App() {
           <span />
         </div>
 
+        {state.screen === "attract" ?
+          <div className="language-switch is-floating" aria-label="Language">
+            {(Object.keys(languageLabels) as QuizLanguage[]).map((language) => (
+              <button
+                aria-pressed={state.language === language}
+                className={state.language === language ? "is-active" : ""}
+                key={language}
+                onClick={() => changeLanguage(language)}
+                type="button"
+              >
+                {languageLabels[language]}
+              </button>
+            ))}
+          </div>
+        : null}
+
         {state.screen !== "attract" ?
           <header className="app-header">
             <div className="brand-block">
-              <p className="eyebrow">Musik & Tanz in Bayern</p>
-              <h1>Welcher Bayern-Typ bist du?</h1>
+              <p className="eyebrow">{copy.headerEyebrow}</p>
+              <h1>{copy.headerTitle}</h1>
             </div>
-            <button className="ghost-button" onClick={resetToAttract} type="button">
-              Reset
-            </button>
+            <div className="header-actions">
+              <div className="language-switch" aria-label="Language">
+                {(Object.keys(languageLabels) as QuizLanguage[]).map((language) => (
+                  <button
+                    aria-pressed={state.language === language}
+                    className={state.language === language ? "is-active" : ""}
+                    key={language}
+                    onClick={() => changeLanguage(language)}
+                    type="button"
+                  >
+                    {languageLabels[language]}
+                  </button>
+                ))}
+              </div>
+              <button className="ghost-button" onClick={resetToAttract} type="button">
+                {copy.reset}
+              </button>
+            </div>
           </header>
         : null}
 
@@ -257,9 +310,9 @@ export default function App() {
               <span className="loop-pulse" />
             </div>
             <div className="attract-copy">
-              <p className="eyebrow">Bayern gehört erlebt</p>
-              <h2>Musik. Tanz. Festival-Vibes.</h2>
-              <span className="pulse-button">Tippen zum Starten</span>
+              <p className="eyebrow">{copy.attractEyebrow}</p>
+              <h2>{copy.attractTitle}</h2>
+              <span className="pulse-button">{copy.attractButton}</span>
             </div>
           </button>
         : null}
@@ -267,13 +320,13 @@ export default function App() {
         {state.screen === "start" ?
           <section className="start-screen">
             <div className="start-copy">
-              <p className="eyebrow">60-Sekunden-Quiz</p>
-              <h2>Du feierst hier - aber welcher Bayern-Vibe steckt wirklich in dir?</h2>
-              <p>Mach das 60-Sekunden-Quiz & finde heraus, welcher Bayern-Typ du bist!</p>
-              <strong>Laut. Echt. Bayerisch.</strong>
+              <p className="eyebrow">{copy.startEyebrow}</p>
+              <h2>{copy.startTitle}</h2>
+              <p>{copy.startDescription}</p>
+              <strong>{copy.startTagline}</strong>
             </div>
             <button className="primary-button start-button" onClick={startQuiz} type="button">
-              okaaay let's go!
+              {copy.startButton}
             </button>
           </section>
         : null}
@@ -282,7 +335,9 @@ export default function App() {
           <section className="question-screen">
             <div className="question-header-panel">
               <div className="question-topline">
-                <span>Frage {state.currentQuestion + 1}/5</span>
+                <span>
+                  {copy.questionLabel} {state.currentQuestion + 1}/{totalQuestions}
+                </span>
                 <span>{progress}%</span>
               </div>
               <div className="progress-bar" aria-hidden="true">
@@ -291,9 +346,9 @@ export default function App() {
               <h2>{currentQuestion.prompt}</h2>
               <div className="footer-row">
                 <button className="secondary-button" onClick={goBack} type="button">
-                  Zurück
+                  {copy.back}
                 </button>
-                <p>Antwort antippen, nächste Frage kommt automatisch.</p>
+                <p>{copy.answerHint}</p>
               </div>
             </div>
 
@@ -317,30 +372,38 @@ export default function App() {
         {state.screen === "calculating" ?
           <section className="calculation-screen" aria-live="polite">
             <div className="spinner" aria-hidden="true" />
-            <h2>Dein Bayern-Vibe wird ermittelt...</h2>
+            <h2>{copy.calculating}</h2>
           </section>
         : null}
 
         {state.screen === "result" && result ?
           <section className="result-screen" style={{ background: result.backdrop }}>
             <article className="result-copy">
-              <p className="eyebrow">Dein Bayern-Typ</p>
+              <p className="eyebrow">{copy.resultEyebrow}</p>
               <h2>{result.region}</h2>
               <h3>{result.title}</h3>
-              <p className="result-vibe">Dein Vibe: {result.vibe}</p>
+              <p className="result-vibe">
+                {copy.resultVibeLabel}: {result.vibe}
+              </p>
               <p>{result.description}</p>
             </article>
 
             <aside className="qr-panel">
-              <p className="scan-copy">Scannen und deinen Bayern-Typ erleben!</p>
-              <QRCodeSVG aria-label={`QR-Code: ${result.guideLabel}`} includeMargin level="M" size={240} value={result.guideUrl} />
+              <p className="scan-copy">{copy.scanCopy}</p>
+              <QRCodeSVG
+                aria-label={`${copy.qrAriaLabel}: ${result.guideLabel}`}
+                includeMargin
+                level="M"
+                size={240}
+                value={result.guideUrl}
+              />
               <h3 className="qr-result-region">{result.region}</h3>
               <p>{result.guideLabel}</p>
               <a className="primary-button" href={result.guideUrl} rel="noreferrer" target="_blank">
                 {result.cta}
               </a>
               <button className="secondary-button" onClick={resetToAttract} type="button">
-                Zur Startseite
+                {copy.homeButton}
               </button>
             </aside>
           </section>

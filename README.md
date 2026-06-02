@@ -1,6 +1,6 @@
-# FestivalTyp Quiz Demo
+# Bavaria Type Quiz Demo
 
-Offline-faehige PWA-Demo fuer ein Festival-Tablet. Die App laeuft als statische Vite/React-Anwendung und kann direkt bei Vercel deployed werden.
+Offline-faehige PWA-Demo fuer ein Bayern-Urlaubsquiz. Die App laeuft als statische Vite/React-Anwendung und kann direkt bei Vercel deployed werden.
 
 ## Lokal starten
 
@@ -34,7 +34,7 @@ Danach ist die Demo direkt erreichbar.
 
 ## Demo-Inhalt anpassen
 
-- Fragen, Antworten, Ergebnis-Texte und Guide-Links: `src/data/quiz.ts`
+- Deutsche und englische Fragen, Antworten, Ergebnis-Texte und Guide-Links: `src/data/quiz.ts`
 - Quiz-Logik, A-D-Scoring und Randomizer bei Gleichstand: `src/lib/scoring.ts`
 - Layout und Farben: `src/styles/app.css`
 - Kampagnenvideo fuer den Startscreen: `public/bayern-gehoert-erlebt.mp4`
@@ -42,6 +42,7 @@ Danach ist die Demo direkt erreichbar.
 ## Aktueller Umfang
 
 - Attract-Loop mit Start-CTA
+- Deutsch/English Sprachumschalter, English als Default
 - 5 Fragen mit je 4 Antworten
 - Auswertung fuer 4 Bayern-Typen nach A-D-Punktesystem
 - Randomizer bei Gleichstand

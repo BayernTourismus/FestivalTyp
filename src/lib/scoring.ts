@@ -1,4 +1,4 @@
-import { questions, resultOrder, results, type BayernTypeId } from "../data/quiz";
+import { resultOrder, type BayernTypeId, type Question } from "../data/quiz";
 
 export type ScoreMap = Record<BayernTypeId, number>;
 
@@ -15,9 +15,7 @@ const pickRandomWinner = (scores: ScoreMap): BayernTypeId => {
   return winners[Math.floor(Math.random() * winners.length)];
 };
 
-export const totalQuestions = questions.length;
-
-export const evaluateQuiz = (selectedAnswers: number[]) => {
+export const evaluateQuiz = (selectedAnswers: number[], questions: Question[]) => {
   const scores = initialScores();
 
   questions.forEach((question, questionIndex) => {
@@ -32,7 +30,6 @@ export const evaluateQuiz = (selectedAnswers: number[]) => {
   const winnerId = pickRandomWinner(scores);
 
   return {
-    result: results[winnerId],
     resultId: winnerId,
     scores,
   };

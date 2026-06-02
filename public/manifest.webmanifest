@@ -1,7 +1,7 @@
 {
-  "name": "Welcher Bayern-Typ bist du?",
+  "name": "What Bavaria Type Are You?",
   "short_name": "Bayern-Typ",
-  "description": "Offline-faehiges Festival-Quiz fuer Musik & Tanz in Bayern.",
+  "description": "Offline-capable vacation quiz for discovering your personal Bavaria type.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#eef6fb",
