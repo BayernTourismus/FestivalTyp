@@ -97,7 +97,9 @@ const resultStyles: Record<BayernTypeId, Pick<ResultMeta, "color" | "accent" | "
   },
 };
 
-const withStyle = (result: Omit<ResultMeta, "color" | "accent" | "backdrop" | "guideUrl">): ResultMeta => ({
+const withStyle = (
+  result: Omit<ResultMeta, "color" | "accent" | "backdrop" | "guideUrl"> & Partial<Pick<ResultMeta, "guideUrl">>,
+): ResultMeta => ({
   ...resultStyles[result.id],
   ...result,
 });
@@ -466,6 +468,7 @@ export const quizContent: Record<QuizLanguage, QuizContent> = {
           "You prefer to travel where centuries-old history meets modern enjoyment of life. Between vineyards, historic magnificent buildings, and creative cities, you feel at home. For you, vacation is more than just sightseeing - it's immersing yourself in a real atmosphere. This exact feeling awaits you in Franconia! Here, top-notch culture combines with urban old-town flair and outstanding culinary arts. During the day you discover charming alleyways and UNESCO World Heritage sites, in the evening you wind down the day with a glass of Silvaner in a traditional Heckenwirtschaft. Discover a Bavaria that is creative, indulgent, and unique. Your Bavaria: inspired, tasteful, and full of character.",
         cta: "Discover Franconia now",
         guideLabel: "Digital travel guide for the Franconia vacation region",
+        guideUrl: "https://bavaria.travel/guide/franconia/",
       }),
       "oberbayern": withStyle({
         id: "oberbayern",
@@ -476,6 +479,7 @@ export const quizContent: Record<QuizLanguage, QuizContent> = {
           "You love big emotions and impressive backdrops - preferably with crystal-clear lake views and majestic mountains. Vacation for you is community: laughing, experiencing, and enjoying together. In Upper Bavaria you'll find exactly this joie de vivre. Here, Bavarian tradition meets modern lightness. First refreshment while swimming or stand-up paddling on the lake, then a relaxing ride on the mountain railway or with the crew to the cozy beer garden. Your Bavaria celebrates life, sociability, and offers you the perfect postcard backdrop for unforgettable memories. Your Bavaria: active, cheerful, and always a little spectacular.",
         cta: "Experience Upper Bavaria now",
         guideLabel: "Digital travel guide for the Upper Bavaria vacation region",
+        guideUrl: "https://bavaria.travel/guide/upper-bavaria/",
       }),
       "ostbayern": withStyle({
         id: "ostbayern",
@@ -486,6 +490,7 @@ export const quizContent: Record<QuizLanguage, QuizContent> = {
           "You seek the original on vacation - where you can completely leave everyday life behind. Eastern Bavaria is exactly your thing: endless forests, wild rivers, and genuine, heartfelt encounters. Far away from mass tourism, you'll find the perfect space for deceleration here. Between the Bavarian Forest National Park and gentle hill landscapes, there are hidden trails and cultural insider tips to discover. During the day you roam through deep forests or glide across the water in a canoe, in the evening you enjoy the silence and the vast starry sky. Your Bavaria is a place to breathe deeply and recharge. Your Bavaria: authentic, quiet, and made for taking a breath.",
         cta: "Experience Eastern Bavaria now",
         guideLabel: "Digital travel guide for the Eastern Bavaria vacation region",
+        guideUrl: "https://bavaria.travel/guide/eastern-bavaria/",
       }),
       "allgaeu-bayerisch-schwaben": withStyle({
         id: "allgaeu-bayerisch-schwaben",
@@ -496,6 +501,7 @@ export const quizContent: Record<QuizLanguage, QuizContent> = {
           "Lying around the pool for a long time is nothing for you - you navigate cleverly through life and stay in motion even on vacation. Welcome to Allgäu and Bavarian Swabia! Here, spectacular outdoor action, expansive cycling and river landscapes, and authentic Alpine culture merge into your perfect active vacation. Whether challenging mountaineering, extensive gravel bike tours, or water sports - here nature pushes you to the limit and rewards you with breathtaking views. Your Bavaria is sporty, smart, and full of drive. Your Bavaria: athletic, lively, and full of ideas.",
         cta: "Experience Allgäu/Bavarian Swabia now",
         guideLabel: "Digital travel guide for the Allgäu/Bavarian Swabia vacation region",
+        guideUrl: "https://bavaria.travel/guide/allgaeu-bavarian-swabia/",
       }),
     },
   },

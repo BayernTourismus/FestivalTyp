@@ -167,7 +167,7 @@ span {
 .motion-backdrop span {
   position: absolute;
   transform: skewX(-28deg);
-  background: linear-gradient(180deg, rgba(0, 31, 71, 0.16), rgba(0, 142, 207, 0.08));
+  background: linear-gradient(180deg, rgba(0, 31, 71, 0.2), rgba(33, 181, 234, 0.1));
 }
 
 .motion-backdrop span:nth-child(1) {
@@ -182,7 +182,7 @@ span {
   left: 78%;
   width: 12%;
   height: 122%;
-  background: linear-gradient(180deg, rgba(255, 206, 68, 0.26), rgba(255, 255, 255, 0.08));
+  background: linear-gradient(180deg, rgba(255, 206, 68, 0.32), rgba(228, 0, 58, 0.1));
 }
 
 .motion-backdrop span:nth-child(3) {
@@ -190,6 +190,7 @@ span {
   left: -7%;
   width: 22%;
   height: 50%;
+  background: linear-gradient(180deg, rgba(0, 122, 98, 0.16), rgba(160, 201, 109, 0.12));
 }
 
 .app-header,
@@ -338,7 +339,7 @@ h3 {
   height: 140%;
   top: -20%;
   transform: skewX(-28deg);
-  background: rgba(255, 255, 255, 0.16);
+  background: rgba(33, 181, 234, 0.24);
   animation: drift 7s linear infinite;
 }
 
@@ -349,13 +350,13 @@ h3 {
 .loop-line-two {
   left: 70%;
   animation-delay: -2.2s;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 206, 68, 0.22);
 }
 
 .loop-line-three {
   left: 84%;
   animation-delay: -4.2s;
-  background: rgba(255, 206, 68, 0.22);
+  background: rgba(228, 0, 58, 0.18);
 }
 
 .loop-pulse {
