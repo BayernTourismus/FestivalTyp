@@ -59,19 +59,31 @@
 }
 
 :root {
-  --bayern-blue: #0050a0;
-  --bayern-sky: #75b7dc;
-  --bayern-ink: #102848;
-  --bayern-muted: #58718d;
-  --bayern-cream: #fff8e9;
-  --bayern-line: rgba(16, 40, 72, 0.16);
+  --bayern-royalblau: #001f47;
+  --bayern-himmelblau: #008ecf;
+  --bayern-lichtblau: #21b5ea;
+  --bayern-accent-dunkelrot: #9e092f;
+  --bayern-accent-hellrot: #e4003a;
+  --bayern-accent-gelb: #ffce44;
+  --bayern-accent-hellgruen: #a0c96d;
+  --bayern-accent-dunkelgruen: #007a62;
+  --bayern-accent-eisenblau: #d3ddf2;
+  --bayern-accent-steingrau: #708197;
+  --bayern-accent-nuss-hell: #aea693;
+  --bayern-accent-nuss-dunkel: #7f6f5a;
+  --bayern-blue: var(--bayern-royalblau);
+  --bayern-sky: var(--bayern-himmelblau);
+  --bayern-ink: var(--bayern-royalblau);
+  --bayern-muted: var(--bayern-accent-steingrau);
+  --bayern-cream: var(--bayern-accent-eisenblau);
+  --bayern-line: rgba(0, 31, 71, 0.16);
   --panel: rgba(255, 255, 255, 0.9);
-  --shadow: 0 26px 70px rgba(16, 40, 72, 0.16);
+  --shadow: 0 26px 70px rgba(0, 31, 71, 0.16);
   --headline-font: "Museo Slab", "Rockwell", "Roboto Slab", serif;
   --body-font: "Museo Sans", "Avenir Next", "Segoe UI", sans-serif;
   font-family: var(--body-font);
   color: var(--bayern-ink);
-  background: #eaf4fb;
+  background: var(--bayern-accent-eisenblau);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -123,7 +135,7 @@ span {
   height: 100dvh;
   padding: 10px;
   overflow: hidden;
-  background: linear-gradient(120deg, rgba(0, 80, 160, 0.2), rgba(255, 248, 233, 0.92)), #eef6fb;
+  background: linear-gradient(120deg, rgba(0, 31, 71, 0.2), rgba(211, 221, 242, 0.92)), var(--bayern-accent-eisenblau);
 }
 
 .experience-frame {
@@ -133,7 +145,7 @@ span {
   overflow: hidden;
   border: 1px solid var(--bayern-line);
   border-radius: 28px;
-  background: linear-gradient(140deg, rgba(255, 255, 255, 0.98), rgba(238, 246, 251, 0.96)), var(--bayern-cream);
+  background: linear-gradient(140deg, rgba(255, 255, 255, 0.98), rgba(211, 221, 242, 0.96)), var(--bayern-cream);
   box-shadow: var(--shadow);
   display: grid;
   grid-template-rows: auto minmax(0, 1fr);
@@ -155,7 +167,7 @@ span {
 .motion-backdrop span {
   position: absolute;
   transform: skewX(-28deg);
-  background: linear-gradient(180deg, rgba(0, 80, 160, 0.16), rgba(117, 183, 220, 0.08));
+  background: linear-gradient(180deg, rgba(0, 31, 71, 0.16), rgba(0, 142, 207, 0.08));
 }
 
 .motion-backdrop span:nth-child(1) {
@@ -170,7 +182,7 @@ span {
   left: 78%;
   width: 12%;
   height: 122%;
-  background: linear-gradient(180deg, rgba(240, 184, 74, 0.26), rgba(255, 255, 255, 0.08));
+  background: linear-gradient(180deg, rgba(255, 206, 68, 0.26), rgba(255, 255, 255, 0.08));
 }
 
 .motion-backdrop span:nth-child(3) {
@@ -219,10 +231,10 @@ span {
   align-items: center;
   gap: 4px;
   padding: 4px;
-  border: 1px solid rgba(0, 80, 160, 0.15);
+  border: 1px solid rgba(0, 31, 71, 0.15);
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.72);
-  box-shadow: 0 10px 28px rgba(16, 40, 72, 0.08);
+  box-shadow: 0 10px 28px rgba(0, 31, 71, 0.08);
 }
 
 .language-switch.is-floating {
@@ -248,7 +260,7 @@ span {
 .language-switch button.is-active {
   background: var(--bayern-blue);
   color: white;
-  box-shadow: 0 8px 18px rgba(0, 80, 160, 0.2);
+  box-shadow: 0 8px 18px rgba(0, 31, 71, 0.2);
 }
 
 .brand-block {
@@ -289,8 +301,8 @@ h3 {
   color: white;
   overflow: hidden;
   background:
-    linear-gradient(125deg, rgba(0, 80, 160, 0.94), rgba(37, 102, 77, 0.75)),
-    radial-gradient(circle at 78% 18%, rgba(240, 184, 74, 0.88), transparent 30%), #0050a0;
+    linear-gradient(125deg, rgba(0, 31, 71, 0.94), rgba(0, 122, 98, 0.75)),
+    radial-gradient(circle at 78% 18%, rgba(255, 206, 68, 0.88), transparent 30%), var(--bayern-royalblau);
 }
 
 .campaign-video {
@@ -306,7 +318,7 @@ h3 {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, rgba(0, 40, 85, 0.48), rgba(0, 80, 160, 0.08) 58%, rgba(0, 40, 85, 0.24));
+  background: linear-gradient(90deg, rgba(0, 31, 71, 0.48), rgba(0, 142, 207, 0.08) 58%, rgba(0, 31, 71, 0.24));
   pointer-events: none;
 }
 
@@ -343,7 +355,7 @@ h3 {
 .loop-line-three {
   left: 84%;
   animation-delay: -4.2s;
-  background: rgba(240, 184, 74, 0.22);
+  background: rgba(255, 206, 68, 0.22);
 }
 
 .loop-pulse {
@@ -415,7 +427,7 @@ h3 {
   border: 1px solid var(--bayern-line);
   border-radius: 22px;
   background: var(--panel);
-  box-shadow: 0 14px 38px rgba(16, 40, 72, 0.08);
+  box-shadow: 0 14px 38px rgba(0, 31, 71, 0.08);
 }
 
 .start-copy {
@@ -468,19 +480,19 @@ h3 {
   padding: 14px 22px;
   background: var(--bayern-blue);
   color: white;
-  box-shadow: 0 14px 28px rgba(0, 80, 160, 0.22);
+  box-shadow: 0 14px 28px rgba(0, 31, 71, 0.22);
 }
 
 .secondary-button,
 .ghost-button {
   padding: 12px 18px;
-  background: rgba(0, 80, 160, 0.08);
+  background: rgba(0, 31, 71, 0.08);
   color: var(--bayern-blue);
 }
 
 .ghost-button {
   background: rgba(255, 255, 255, 0.72);
-  border: 1px solid rgba(0, 80, 160, 0.15);
+  border: 1px solid rgba(0, 31, 71, 0.15);
 }
 
 .primary-button:hover,
@@ -525,7 +537,7 @@ h3 {
   height: 12px;
   overflow: hidden;
   border-radius: 999px;
-  background: rgba(0, 80, 160, 0.1);
+  background: rgba(0, 31, 71, 0.1);
 }
 
 .progress-bar-fill {
@@ -560,14 +572,14 @@ h3 {
   min-width: 0;
   overflow: auto;
   width: 100%;
-  border: 1px solid rgba(0, 80, 160, 0.14);
+  border: 1px solid rgba(0, 31, 71, 0.14);
   border-radius: 22px;
   padding: 26px 24px 24px 86px;
   cursor: pointer;
   text-align: left;
-  background: linear-gradient(180deg, white, rgba(238, 246, 251, 0.92));
+  background: linear-gradient(180deg, white, rgba(211, 221, 242, 0.92));
   color: var(--bayern-ink);
-  box-shadow: 0 12px 30px rgba(16, 40, 72, 0.07);
+  box-shadow: 0 12px 30px rgba(0, 31, 71, 0.07);
   transition:
     transform 140ms ease,
     box-shadow 140ms ease,
@@ -580,9 +592,9 @@ h3 {
 }
 
 .answer-card.is-selected {
-  border-color: rgba(240, 184, 74, 0.9);
-  background: linear-gradient(180deg, #fff7df, #fff);
-  box-shadow: 0 18px 38px rgba(240, 184, 74, 0.2);
+  border-color: rgba(255, 206, 68, 0.9);
+  background: linear-gradient(180deg, rgba(255, 206, 68, 0.18), #fff);
+  box-shadow: 0 18px 38px rgba(255, 206, 68, 0.2);
   transform: translateY(-2px) scale(1.01);
 }
 
@@ -623,7 +635,7 @@ h3 {
 .spinner {
   width: 96px;
   height: 96px;
-  border: 12px solid rgba(0, 80, 160, 0.12);
+  border: 12px solid rgba(0, 31, 71, 0.12);
   border-top-color: var(--bayern-blue);
   border-radius: 50%;
   animation: spin 900ms linear infinite;
@@ -695,7 +707,7 @@ h3 {
   border-radius: 12px;
   background: white;
   padding: 10px;
-  box-shadow: 0 14px 34px rgba(16, 40, 72, 0.15);
+  box-shadow: 0 14px 34px rgba(0, 31, 71, 0.15);
 }
 
 .qr-panel p {

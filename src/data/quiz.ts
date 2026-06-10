@@ -69,31 +69,31 @@ export const resultOrder: BayernTypeId[] = ["franken", "oberbayern", "ostbayern"
 const resultStyles: Record<BayernTypeId, Pick<ResultMeta, "color" | "accent" | "backdrop" | "guideUrl">> = {
   "franken": {
     guideUrl: "https://erlebe.bayern/guide/franken/",
-    color: "#8a3f6f",
-    accent: "#f0b84a",
+    color: "#9e092f",
+    accent: "#ffce44",
     backdrop:
-      "linear-gradient(135deg, rgba(138, 63, 111, 0.95), rgba(184, 74, 83, 0.82)), radial-gradient(circle at 74% 16%, rgba(240, 184, 74, 0.72), transparent 31%)",
+      "linear-gradient(135deg, rgba(158, 9, 47, 0.95), rgba(228, 0, 58, 0.82)), radial-gradient(circle at 74% 16%, rgba(255, 206, 68, 0.72), transparent 31%)",
   },
   "oberbayern": {
     guideUrl: "https://erlebe.bayern/guide/oberbayern/",
-    color: "#0050a0",
-    accent: "#6ec1e4",
+    color: "#001f47",
+    accent: "#21b5ea",
     backdrop:
-      "linear-gradient(135deg, rgba(0, 80, 160, 0.94), rgba(30, 132, 165, 0.82)), radial-gradient(circle at 78% 18%, rgba(255, 255, 255, 0.66), transparent 28%)",
+      "linear-gradient(135deg, rgba(0, 31, 71, 0.94), rgba(0, 142, 207, 0.82)), radial-gradient(circle at 78% 18%, rgba(33, 181, 234, 0.66), transparent 28%)",
   },
   "ostbayern": {
     guideUrl: "https://erlebe.bayern/guide/ostbayern/",
-    color: "#25664d",
-    accent: "#91c46c",
+    color: "#007a62",
+    accent: "#a0c96d",
     backdrop:
-      "linear-gradient(135deg, rgba(37, 102, 77, 0.95), rgba(33, 83, 103, 0.86)), radial-gradient(circle at 78% 18%, rgba(145, 196, 108, 0.68), transparent 30%)",
+      "linear-gradient(135deg, rgba(0, 122, 98, 0.95), rgba(0, 31, 71, 0.86)), radial-gradient(circle at 78% 18%, rgba(160, 201, 109, 0.68), transparent 30%)",
   },
   "allgaeu-bayerisch-schwaben": {
     guideUrl: "https://erlebe.bayern/guide/allgaeu-bayerisch-schwaben/",
-    color: "#c04e24",
-    accent: "#ffc857",
+    color: "#7f6f5a",
+    accent: "#aea693",
     backdrop:
-      "linear-gradient(135deg, rgba(192, 78, 36, 0.96), rgba(130, 66, 143, 0.78)), radial-gradient(circle at 78% 18%, rgba(255, 200, 87, 0.68), transparent 29%)",
+      "linear-gradient(135deg, rgba(127, 111, 90, 0.96), rgba(158, 9, 47, 0.78)), radial-gradient(circle at 78% 18%, rgba(174, 166, 147, 0.68), transparent 29%)",
   },
 };
 
