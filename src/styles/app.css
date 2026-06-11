@@ -695,7 +695,7 @@ h3 {
   display: grid;
   align-content: center;
   justify-items: center;
-  gap: 14px;
+  gap: 10px;
   padding: 22px;
   color: var(--bayern-ink);
   text-align: center;
