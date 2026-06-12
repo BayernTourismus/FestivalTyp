@@ -377,7 +377,7 @@ export default function App() {
         : null}
 
         {state.screen === "result" && result ?
-          <section className="result-screen" style={{ background: result.backdrop }}>
+          <section className="result-screen" style={{ backgroundImage: `${result.backdrop}, url(${result.imageSrc})` }}>
             <article className="result-copy">
               <p className="eyebrow">{copy.resultEyebrow}</p>
               <h2>{result.region}</h2>

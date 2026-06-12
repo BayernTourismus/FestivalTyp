@@ -14,6 +14,7 @@ export type ResultMeta = {
   color: string;
   accent: string;
   backdrop: string;
+  imageSrc: string;
 };
 
 export type Answer = {
@@ -66,39 +67,43 @@ export const languageLabels: Record<QuizLanguage, string> = {
 
 export const resultOrder: BayernTypeId[] = ["franken", "oberbayern", "ostbayern", "allgaeu-bayerisch-schwaben"];
 
-const resultStyles: Record<BayernTypeId, Pick<ResultMeta, "color" | "accent" | "backdrop" | "guideUrl">> = {
+const resultStyles: Record<BayernTypeId, Pick<ResultMeta, "color" | "accent" | "backdrop" | "guideUrl" | "imageSrc">> = {
   "franken": {
     guideUrl: "https://erlebe.bayern/guide/franken/",
     color: "#9e092f",
     accent: "#ffce44",
+    imageSrc: "/result-screen/Franken.jpeg",
     backdrop:
-      "linear-gradient(135deg, rgba(158, 9, 47, 0.95), rgba(228, 0, 58, 0.82)), radial-gradient(circle at 74% 16%, rgba(255, 206, 68, 0.72), transparent 31%)",
+      "linear-gradient(135deg, rgba(158, 9, 47, 0.76), rgba(228, 0, 58, 0.48)), radial-gradient(circle at 74% 16%, rgba(255, 206, 68, 0.5), transparent 31%)",
   },
   "oberbayern": {
     guideUrl: "https://erlebe.bayern/guide/oberbayern/",
     color: "#001f47",
     accent: "#21b5ea",
+    imageSrc: "/result-screen/Oberbayern.jpeg",
     backdrop:
-      "linear-gradient(135deg, rgba(0, 31, 71, 0.94), rgba(0, 142, 207, 0.82)), radial-gradient(circle at 78% 18%, rgba(33, 181, 234, 0.66), transparent 28%)",
+      "linear-gradient(135deg, rgba(0, 31, 71, 0.76), rgba(0, 142, 207, 0.5)), radial-gradient(circle at 78% 18%, rgba(33, 181, 234, 0.44), transparent 28%)",
   },
   "ostbayern": {
     guideUrl: "https://erlebe.bayern/guide/ostbayern/",
     color: "#007a62",
     accent: "#a0c96d",
+    imageSrc: "/result-screen/Ostbayern.jpeg",
     backdrop:
-      "linear-gradient(135deg, rgba(0, 122, 98, 0.95), rgba(0, 31, 71, 0.86)), radial-gradient(circle at 78% 18%, rgba(160, 201, 109, 0.68), transparent 30%)",
+      "linear-gradient(135deg, rgba(0, 122, 98, 0.76), rgba(0, 31, 71, 0.58)), radial-gradient(circle at 78% 18%, rgba(160, 201, 109, 0.46), transparent 30%)",
   },
   "allgaeu-bayerisch-schwaben": {
     guideUrl: "https://erlebe.bayern/guide/allgaeu-bayerisch-schwaben/",
     color: "#7f6f5a",
     accent: "#aea693",
+    imageSrc: "/result-screen/Allgaeu-BayerischSchwaben.jpeg",
     backdrop:
-      "linear-gradient(135deg, rgba(127, 111, 90, 0.96), rgba(158, 9, 47, 0.78)), radial-gradient(circle at 78% 18%, rgba(174, 166, 147, 0.68), transparent 29%)",
+      "linear-gradient(135deg, rgba(127, 111, 90, 0.76), rgba(158, 9, 47, 0.48)), radial-gradient(circle at 78% 18%, rgba(174, 166, 147, 0.46), transparent 29%)",
   },
 };
 
 const withStyle = (
-  result: Omit<ResultMeta, "color" | "accent" | "backdrop" | "guideUrl"> & Partial<Pick<ResultMeta, "guideUrl">>,
+  result: Omit<ResultMeta, "color" | "accent" | "backdrop" | "guideUrl" | "imageSrc"> & Partial<Pick<ResultMeta, "guideUrl">>,
 ): ResultMeta => ({
   ...resultStyles[result.id],
   ...result,
