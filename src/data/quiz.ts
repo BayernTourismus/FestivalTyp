@@ -72,7 +72,7 @@ const resultStyles: Record<BayernTypeId, Pick<ResultMeta, "color" | "accent" | "
     guideUrl: "https://erlebe.bayern/guide/franken/",
     color: "#9e092f",
     accent: "#ffce44",
-    imageSrc: "/result-screen/Franken.jpeg",
+    imageSrc: "/result-screen/Franken.webp",
     backdrop:
       "linear-gradient(135deg, rgba(158, 9, 47, 0.48), rgba(0, 31, 71, 0.26)), radial-gradient(circle at 74% 16%, rgba(255, 206, 68, 0.22), transparent 31%)",
   },
@@ -80,7 +80,7 @@ const resultStyles: Record<BayernTypeId, Pick<ResultMeta, "color" | "accent" | "
     guideUrl: "https://erlebe.bayern/guide/oberbayern/",
     color: "#001f47",
     accent: "#21b5ea",
-    imageSrc: "/result-screen/Oberbayern.jpeg",
+    imageSrc: "/result-screen/Oberbayern.webp",
     backdrop:
       "linear-gradient(135deg, rgba(0, 31, 71, 0.52), rgba(0, 142, 207, 0.24)), radial-gradient(circle at 78% 18%, rgba(33, 181, 234, 0.22), transparent 28%)",
   },
@@ -88,7 +88,7 @@ const resultStyles: Record<BayernTypeId, Pick<ResultMeta, "color" | "accent" | "
     guideUrl: "https://erlebe.bayern/guide/ostbayern/",
     color: "#007a62",
     accent: "#a0c96d",
-    imageSrc: "/result-screen/Ostbayern.jpeg",
+    imageSrc: "/result-screen/Ostbayern.webp",
     backdrop:
       "linear-gradient(135deg, rgba(0, 122, 98, 0.48), rgba(0, 31, 71, 0.32)), radial-gradient(circle at 78% 18%, rgba(160, 201, 109, 0.22), transparent 30%)",
   },
@@ -96,7 +96,7 @@ const resultStyles: Record<BayernTypeId, Pick<ResultMeta, "color" | "accent" | "
     guideUrl: "https://erlebe.bayern/guide/allgaeu-bayerisch-schwaben/",
     color: "#7f6f5a",
     accent: "#aea693",
-    imageSrc: "/result-screen/Allgaeu-BayerischSchwaben.jpeg",
+    imageSrc: "/result-screen/Allgaeu-BayerischSchwaben.webp",
     backdrop:
       "linear-gradient(135deg, rgba(127, 111, 90, 0.46), rgba(158, 9, 47, 0.22)), radial-gradient(circle at 78% 18%, rgba(174, 166, 147, 0.22), transparent 29%)",
   },
