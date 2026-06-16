@@ -369,7 +369,7 @@ export default function App() {
             <article className="result-copy">
               <p className="eyebrow">{copy.resultEyebrow}</p>
               <h2>
-                {result.region.split(" / ").map((part, i, arr) => (
+                {result.region.split(/\s*\/\s*/).map((part, i, arr) => (
                   <span key={i}>
                     {part}
                     {i < arr.length - 1 && (
@@ -398,7 +398,7 @@ export default function App() {
                 value={result.guideUrl}
               />
               <h3 className="qr-result-region">
-                {result.region.split(" / ").map((part, i, arr) => (
+                {result.region.split(/\s*\/\s*/).map((part, i, arr) => (
                   <span key={i}>
                     {part}
                     {i < arr.length - 1 && (
@@ -412,7 +412,17 @@ export default function App() {
               </h3>
               <p>{result.guideLabel}</p>
               <a className="primary-button" href={result.guideUrl} rel="noreferrer" target="_blank">
-                {result.cta}
+                {result.cta.split(/\s*\/\s*/).map((part, i, arr) => (
+                  <span key={i}>
+                    {part}
+                    {i < arr.length - 1 && (
+                      <>
+                        {" /"}
+                        <br />
+                      </>
+                    )}
+                  </span>
+                ))}
               </a>
             </aside>
           </section>
