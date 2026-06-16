@@ -627,7 +627,7 @@ h3 {
 }
 
 .qr-panel svg {
-  width: min(240px, 100%);
+  width: min(200px, 100%);
   height: auto;
   aspect-ratio: 1;
   border-radius: 12px;
@@ -842,12 +842,12 @@ h3 {
   }
 
   .qr-panel {
-    gap: 10px;
+    gap: 8px;
     padding: 16px;
   }
 
   .qr-panel svg {
-    width: min(190px, 100%);
+    width: min(160px, 100%);
   }
 }
 
