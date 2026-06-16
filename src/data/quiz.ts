@@ -274,7 +274,7 @@ export const quizContent: Record<QuizLanguage, QuizContent> = {
         description:
           "Du reist am liebsten dorthin, wo jahrhundertealte Geschichte auf modernen Lebensgenuss trifft. Zwischen Weinreben, historischen Prachtbauten und kreativen Städten fühlst du dich zuhause. Für dich ist Urlaub mehr als nur Sightseeing - es ist das Eintauchen in eine echte Atmosphäre. Genau dieses Gefühl erwartet dich in Franken! Hier verbindet sich hochkarätige Kultur mit urbanem Altstadt-Flair und herausragender Kulinarik. Tagsüber entdeckst du charmante Gassen und UNESCO-Welterbestätten, abends lässt du den Tag bei einem Glas Silvaner in einer traditionellen Heckenwirtschaft ausklingen. Entdecke ein Bayern, das kreativ, genussvoll und einzigartig ist. Dein Bayern: inspiriert, geschmackvoll und voller Charakter.",
         cta: "Jetzt Franken entdecken",
-        guideLabel: "Digitaler Reiseführer zur Urlaubsregion Franken",
+        guideLabel: "Reiseinspiration zur Urlaubsregion",
       }),
       "oberbayern": withStyle({
         id: "oberbayern",
@@ -284,7 +284,7 @@ export const quizContent: Record<QuizLanguage, QuizContent> = {
         description:
           "Du liebst große Gefühle und beeindruckende Kulissen - am liebsten mit kristallklarem Seeblick und majestätischen Bergen. Urlaub ist für dich Gemeinschaft: zusammen lachen, erleben und genießen. In Oberbayern findest du genau diese Lebensfreude. Hier trifft bayerische Tradition auf moderne Leichtigkeit. Erst Erfrischung beim Schwimmen oder Stand-Up-Paddling auf dem See, danach eine entspannte Fahrt mit der Bergbahn oder mit der Crew in den gemütlichen Biergarten. Dein Bayern feiert das Leben, die Geselligkeit und bietet dir die perfekte Postkarten-Kulisse für unvergessliche Erinnerungen. Dein Bayern: aktiv, fröhlich und immer ein bisschen spektakulär.",
         cta: "Jetzt Oberbayern erleben",
-        guideLabel: "Digitaler Reiseführer zur Urlaubsregion Oberbayern",
+        guideLabel: "Reiseinspiration zur Urlaubsregion",
       }),
       "ostbayern": withStyle({
         id: "ostbayern",
@@ -294,7 +294,7 @@ export const quizContent: Record<QuizLanguage, QuizContent> = {
         description:
           "Du suchst im Urlaub das Ursprüngliche - wo du den Alltag komplett hinter dir lassen kannst. Ostbayern ist genau dein Ding: endlose Wälder, wilde Flüsse und echte, herzliche Begegnungen. Weit weg vom Massentourismus findest du hier den perfekten Raum zur Entschleunigung. Zwischen dem Nationalpark Bayerischer Wald und sanften Hügellandschaften gibt es verborgene Pfade und kulturelle Geheimtipps zu entdecken. Tagsüber durchstreifst du tiefe Wälder oder gleitest mit dem Kanu übers Wasser, abends genießt du die Stille und den weiten Sternenhimmel. Dein Bayern ist ein Ort zum Durchatmen und Krafttanken. Dein Bayern: echt, ruhig und zum Durchatmen gemacht.",
         cta: "Jetzt Ostbayern erleben",
-        guideLabel: "Digitaler Reiseführer zur Urlaubsregion Ostbayern",
+        guideLabel: "Reiseinspiration zur Urlaubsregion",
       }),
       "allgaeu-bayerisch-schwaben": withStyle({
         id: "allgaeu-bayerisch-schwaben",
@@ -304,7 +304,7 @@ export const quizContent: Record<QuizLanguage, QuizContent> = {
         description:
           "Langes Rumliegen am Pool ist nichts für dich - du navigierst clever durchs Leben und bleibst auch im Urlaub immer in Bewegung. Willkommen im Allgäu und in Bayerisch-Schwaben! Hier verschmelzen spektakuläre Outdoor-Action, weite Rad- und Flusslandschaften und echte Alpinkultur zu deinem perfekten Aktivurlaub. Ob anspruchsvolles Bergsteigen, weite Gravel-Bike-Touren oder Wassersport - hier pusht dich die Natur ans Limit und belohnt dich mit atemberaubenden Aussichten. Dein Bayern ist sportlich, smart und voller Drive. Dein Bayern: sportlich, lebendig und voller Ideen.",
         cta: "Jetzt Allgäu/Bayerisch-Schwaben erleben",
-        guideLabel: "Die Urlaubsregion Allgäu/Bayerisch-Schwaben",
+        guideLabel: "Reiseinspiration zur Urlaubsregion",
       }),
     },
   },
@@ -472,7 +472,7 @@ export const quizContent: Record<QuizLanguage, QuizContent> = {
         description:
           "You prefer to travel where centuries-old history meets modern enjoyment of life. Between vineyards, historic magnificent buildings, and creative cities, you feel at home. For you, vacation is more than just sightseeing - it's immersing yourself in a real atmosphere. This exact feeling awaits you in Franconia! Here, top-notch culture combines with urban old-town flair and outstanding culinary arts. During the day you discover charming alleyways and UNESCO World Heritage sites, in the evening you wind down the day with a glass of Silvaner in a traditional Heckenwirtschaft. Discover a Bavaria that is creative, indulgent, and unique. Your Bavaria: inspired, tasteful, and full of character.",
         cta: "Discover Franconia now",
-        guideLabel: "Digital travel guide for the Franconia vacation region",
+        guideLabel: "Travel inspiration for the vacation region",
         guideUrl: "https://bavaria.travel/guide/franconia/",
       }),
       "oberbayern": withStyle({
@@ -483,7 +483,7 @@ export const quizContent: Record<QuizLanguage, QuizContent> = {
         description:
           "You love big emotions and impressive backdrops - preferably with crystal-clear lake views and majestic mountains. Vacation for you is community: laughing, experiencing, and enjoying together. In Upper Bavaria you'll find exactly this joie de vivre. Here, Bavarian tradition meets modern lightness. First refreshment while swimming or stand-up paddling on the lake, then a relaxing ride on the mountain railway or with the crew to the cozy beer garden. Your Bavaria celebrates life, sociability, and offers you the perfect postcard backdrop for unforgettable memories. Your Bavaria: active, cheerful, and always a little spectacular.",
         cta: "Experience Upper Bavaria now",
-        guideLabel: "Digital travel guide for the Upper Bavaria vacation region",
+        guideLabel: "Travel inspiration for the vacation region",
         guideUrl: "https://bavaria.travel/guide/upper-bavaria/",
       }),
       "ostbayern": withStyle({
@@ -494,7 +494,7 @@ export const quizContent: Record<QuizLanguage, QuizContent> = {
         description:
           "You seek the original on vacation - where you can completely leave everyday life behind. Eastern Bavaria is exactly your thing: endless forests, wild rivers, and genuine, heartfelt encounters. Far away from mass tourism, you'll find the perfect space for deceleration here. Between the Bavarian Forest National Park and gentle hill landscapes, there are hidden trails and cultural insider tips to discover. During the day you roam through deep forests or glide across the water in a canoe, in the evening you enjoy the silence and the vast starry sky. Your Bavaria is a place to breathe deeply and recharge. Your Bavaria: authentic, quiet, and made for taking a breath.",
         cta: "Experience Eastern Bavaria now",
-        guideLabel: "Digital travel guide for the Eastern Bavaria vacation region",
+        guideLabel: "Travel inspiration for the vacation region",
         guideUrl: "https://bavaria.travel/guide/eastern-bavaria/",
       }),
       "allgaeu-bayerisch-schwaben": withStyle({
@@ -505,7 +505,7 @@ export const quizContent: Record<QuizLanguage, QuizContent> = {
         description:
           "Lying around the pool for a long time is nothing for you - you navigate cleverly through life and stay in motion even on vacation. Welcome to Allgäu and Bavarian Swabia! Here, spectacular outdoor action, expansive cycling and river landscapes, and authentic Alpine culture merge into your perfect active vacation. Whether challenging mountaineering, extensive gravel bike tours, or water sports - here nature pushes you to the limit and rewards you with breathtaking views. Your Bavaria is sporty, smart, and full of drive. Your Bavaria: athletic, lively, and full of ideas.",
         cta: "Experience Allgäu/Bavarian Swabia now",
-        guideLabel: "Digital travel guide for the Allgäu/Bavarian Swabia vacation region",
+        guideLabel: "Travel inspiration for the vacation region",
         guideUrl: "https://bavaria.travel/guide/allgaeu-bavarian-swabia/",
       }),
     },
