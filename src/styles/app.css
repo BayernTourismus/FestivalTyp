@@ -579,7 +579,7 @@ h3 {
   overflow: auto;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: space-between;
   gap: 14px;
   padding: clamp(12px, 2vw, 24px);
   text-shadow: 0 2px 18px rgba(0, 31, 71, 0.48);

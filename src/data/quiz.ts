@@ -115,7 +115,7 @@ export const quizContent: Record<QuizLanguage, QuizContent> = {
       headerEyebrow: "Servus Urlaub",
       headerTitle: "Welcher Bayern-Typ bist du?",
       reset: "Reset",
-      attractEyebrow: "Bayern gehört erlebt",
+      attractEyebrow: "Servus Urlaub",
       attractTitle: "Natürlich. Echt. Bayerisch.",
       attractButton: "Tippen zum Starten",
       startEyebrow: "60-Sekunden-Quiz",
@@ -140,22 +140,22 @@ export const quizContent: Record<QuizLanguage, QuizContent> = {
         answers: [
           {
             option: "A",
-            label: "Inspirierend - wenn Geschichte, Kreativität und regionaler Genuss zu einem einzigartigen Erlebnis werden",
+            label: "Kulturverliebt",
             resultId: "franken",
           },
           {
             option: "B",
-            label: "Befreiend - wenn ich unter freiem Himmel bin und mich einfach im Moment treiben lassen kann",
-            resultId: "ostbayern",
-          },
-          {
-            option: "C",
-            label: "Verbindend - wenn ich mit anderen zusammen lache, feiere und das Leben in vollen Zügen genieße",
+            label: "Gesellig",
             resultId: "oberbayern",
           },
           {
+            option: "C",
+            label: "Entspannt",
+            resultId: "ostbayern",
+          },
+          {
             option: "D",
-            label: "Fordernd - wenn ich den Puls spüre und die Natur mich zu neuen Höchstleistungen antreibt",
+            label: "Abenteuerlustig",
             resultId: "allgaeu-bayerisch-schwaben",
           },
         ],
@@ -299,7 +299,7 @@ export const quizContent: Record<QuizLanguage, QuizContent> = {
       "allgaeu-bayerisch-schwaben": withStyle({
         id: "allgaeu-bayerisch-schwaben",
         title: "Der Gipfel-Stürmer",
-        region: "Allgäu / Bayerisch Schwaben",
+        region: "Allgäu / Bayerisch-Schwaben",
         vibe: "Dynamisch. Kreativ. Abenteuerlustig.",
         description:
           "Langes Rumliegen am Pool ist nichts für dich - du navigierst clever durchs Leben und bleibst auch im Urlaub immer in Bewegung. Willkommen im Allgäu und in Bayerisch-Schwaben! Hier verschmelzen spektakuläre Outdoor-Action, weite Rad- und Flusslandschaften und echte Alpinkultur zu deinem perfekten Aktivurlaub. Ob anspruchsvolles Bergsteigen, weite Gravel-Bike-Touren oder Wassersport - hier pusht dich die Natur ans Limit und belohnt dich mit atemberaubenden Aussichten. Dein Bayern ist sportlich, smart und voller Drive. Dein Bayern: sportlich, lebendig und voller Ideen.",
@@ -338,22 +338,22 @@ export const quizContent: Record<QuizLanguage, QuizContent> = {
         answers: [
           {
             option: "A",
-            label: "Inspiring - when history, creativity, and regional indulgence become a unique experience",
+            label: "Culture Lover",
             resultId: "franken",
           },
           {
             option: "B",
-            label: "Liberating - when I'm under the open sky and can simply drift in the moment",
-            resultId: "ostbayern",
-          },
-          {
-            option: "C",
-            label: "Connecting - when I laugh, celebrate, and enjoy life to the fullest with others",
+            label: "Sociable",
             resultId: "oberbayern",
           },
           {
+            option: "C",
+            label: "Relaxed",
+            resultId: "ostbayern",
+          },
+          {
             option: "D",
-            label: "Challenging - when I feel my pulse and nature drives me to new peak performances",
+            label: "Adventurous",
             resultId: "allgaeu-bayerisch-schwaben",
           },
         ],
@@ -500,7 +500,7 @@ export const quizContent: Record<QuizLanguage, QuizContent> = {
       "allgaeu-bayerisch-schwaben": withStyle({
         id: "allgaeu-bayerisch-schwaben",
         title: "The Peak Conqueror",
-        region: "Allgäu / Bavarian Swabia",
+        region: "Allgäu / Bavarian-Swabia",
         vibe: "Dynamic. Creative. Adventurous.",
         description:
           "Lying around the pool for a long time is nothing for you - you navigate cleverly through life and stay in motion even on vacation. Welcome to Allgäu and Bavarian Swabia! Here, spectacular outdoor action, expansive cycling and river landscapes, and authentic Alpine culture merge into your perfect active vacation. Whether challenging mountaineering, extensive gravel bike tours, or water sports - here nature pushes you to the limit and rewards you with breathtaking views. Your Bavaria is sporty, smart, and full of drive. Your Bavaria: athletic, lively, and full of ideas.",
