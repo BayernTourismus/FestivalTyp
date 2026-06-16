@@ -699,6 +699,9 @@ h3 {
 .result-copy h2 {
   font-size: clamp(4rem, 8vw, 8.4rem);
   line-height: 0.84;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
 }
 
 .result-copy h3 {
@@ -755,6 +758,9 @@ h3 {
   color: var(--bayern-blue);
   font-size: clamp(1.7rem, 2.6vw, 2.8rem);
   line-height: 0.95;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
 }
 
 @keyframes pulseButton {
