@@ -368,7 +368,19 @@ export default function App() {
           <section className="result-screen" style={{ backgroundImage: `${result.backdrop}, url(${result.imageSrc})` }}>
             <article className="result-copy">
               <p className="eyebrow">{copy.resultEyebrow}</p>
-              <h2>{result.region}</h2>
+              <h2>
+                {result.region.split(" / ").map((part, i, arr) => (
+                  <span key={i}>
+                    {part}
+                    {i < arr.length - 1 && (
+                      <>
+                        {" /"}
+                        <br />
+                      </>
+                    )}
+                  </span>
+                ))}
+              </h2>
               <h3>{result.title}</h3>
               <p className="result-vibe">
                 {copy.resultVibeLabel}: {result.vibe}
@@ -385,7 +397,19 @@ export default function App() {
                 size={240}
                 value={result.guideUrl}
               />
-              <h3 className="qr-result-region">{result.region}</h3>
+              <h3 className="qr-result-region">
+                {result.region.split(" / ").map((part, i, arr) => (
+                  <span key={i}>
+                    {part}
+                    {i < arr.length - 1 && (
+                      <>
+                        {" /"}
+                        <br />
+                      </>
+                    )}
+                  </span>
+                ))}
+              </h3>
               <p>{result.guideLabel}</p>
               <a className="primary-button" href={result.guideUrl} rel="noreferrer" target="_blank">
                 {result.cta}
