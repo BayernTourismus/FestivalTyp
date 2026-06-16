@@ -390,9 +390,6 @@ export default function App() {
               <a className="primary-button" href={result.guideUrl} rel="noreferrer" target="_blank">
                 {result.cta}
               </a>
-              <button className="secondary-button" onClick={resetToAttract} type="button">
-                {copy.homeButton}
-              </button>
             </aside>
           </section>
         : null}
