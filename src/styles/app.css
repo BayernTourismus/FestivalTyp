@@ -157,63 +157,6 @@ span {
   padding: 0;
 }
 
-.motion-backdrop {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.motion-backdrop span {
-  position: absolute;
-  transform: skewX(-28deg);
-  background: linear-gradient(
-    180deg,
-    color-mix(in srgb, var(--bayern-royalblau) 28%, transparent),
-    color-mix(in srgb, var(--bayern-royalblau) 8%, transparent)
-  );
-}
-
-.motion-backdrop span:nth-child(1) {
-  top: -16%;
-  left: 58%;
-  width: 26%;
-  height: 140%;
-  background: linear-gradient(
-    180deg,
-    color-mix(in srgb, var(--bayern-royalblau) 28%, transparent),
-    color-mix(in srgb, var(--bayern-royalblau) 8%, transparent)
-  );
-}
-
-.motion-backdrop span:nth-child(2) {
-  top: -10%;
-  left: 78%;
-  width: 12%;
-  height: 122%;
-  background: linear-gradient(
-    180deg,
-    color-mix(in srgb, var(--bayern-himmelblau) 30%, transparent),
-    color-mix(in srgb, var(--bayern-himmelblau) 8%, transparent)
-  );
-}
-
-.motion-backdrop span:nth-child(3) {
-  top: 56%;
-  left: -7%;
-  width: 22%;
-  height: 50%;
-  background: linear-gradient(
-    180deg,
-    color-mix(in srgb, var(--bayern-lichtblau) 30%, transparent),
-    color-mix(in srgb, var(--bayern-lichtblau) 8%, transparent)
-  );
-}
-
-.screen-start .motion-backdrop {
-  display: none;
-}
-
 .app-header,
 .question-topline,
 .footer-row {
@@ -342,54 +285,6 @@ h3 {
   inset: 0;
   background: linear-gradient(90deg, rgba(0, 31, 71, 0.48), rgba(0, 142, 207, 0.08) 58%, rgba(0, 31, 71, 0.24));
   pointer-events: none;
-}
-
-.campaign-loop,
-.campaign-loop span {
-  position: absolute;
-}
-
-.campaign-loop {
-  inset: 0;
-  overflow: hidden;
-  opacity: 0.58;
-}
-
-.loop-line {
-  display: none;
-  width: 16%;
-  height: 140%;
-  top: -20%;
-  transform: skewX(-28deg);
-  background: color-mix(in srgb, var(--bayern-lichtblau) 24%, transparent);
-  animation: drift 7s linear infinite;
-}
-
-.loop-line-one {
-  left: 54%;
-}
-
-.loop-line-two {
-  left: 70%;
-  animation-delay: -2.2s;
-  background: color-mix(in srgb, var(--bayern-himmelblau) 22%, transparent);
-}
-
-.loop-line-three {
-  left: 84%;
-  animation-delay: -4.2s;
-  background: color-mix(in srgb, var(--bayern-royalblau) 22%, transparent);
-}
-
-.loop-pulse {
-  display: none;
-  right: 8%;
-  bottom: 10%;
-  width: min(34vw, 420px);
-  aspect-ratio: 1;
-  border: 2px solid rgba(255, 255, 255, 0.28);
-  border-radius: 50%;
-  animation: halo 2.4s ease-in-out infinite;
 }
 
 .attract-copy {
@@ -770,27 +665,6 @@ h3 {
   }
   50% {
     transform: scale(1.04);
-  }
-}
-
-@keyframes halo {
-  0%,
-  100% {
-    transform: scale(0.9);
-    opacity: 0.42;
-  }
-  50% {
-    transform: scale(1.08);
-    opacity: 0.72;
-  }
-}
-
-@keyframes drift {
-  0% {
-    transform: translateX(-8%) skewX(-28deg);
-  }
-  100% {
-    transform: translateX(18%) skewX(-28deg);
   }
 }
 

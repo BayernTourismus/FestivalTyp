@@ -249,12 +249,6 @@ export default function App() {
   return (
     <main className="app-shell">
       <section className={`experience-frame screen-${state.screen}`}>
-        <div className="motion-backdrop" aria-hidden="true">
-          <span />
-          <span />
-          <span />
-        </div>
-
         {state.screen === "attract" ?
           <div className="language-switch is-floating" aria-label="Language">
             {(Object.keys(languageLabels) as QuizLanguage[]).map((language) => (
@@ -303,12 +297,6 @@ export default function App() {
             <video className="campaign-video" aria-hidden="true" autoPlay loop muted playsInline preload="auto">
               <source src={CAMPAIGN_VIDEO_SRC} type="video/mp4" />
             </video>
-            <div className="campaign-loop" aria-hidden="true">
-              <span className="loop-line loop-line-one" />
-              <span className="loop-line loop-line-two" />
-              <span className="loop-line loop-line-three" />
-              <span className="loop-pulse" />
-            </div>
             <div className="attract-copy">
               <p className="eyebrow">{copy.attractEyebrow}</p>
               <h2>{copy.attractTitle}</h2>
