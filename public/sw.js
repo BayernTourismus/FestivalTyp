@@ -1,4 +1,5 @@
-const CACHE_NAME = 'festivaltyp-v3'
+const CACHE_NAME = 'festivaltyp-v4'
+const VIDEO_PATHS = ['/bayern-gehoert-erlebt.mp4']
 const APP_SHELL = [
   '/',
   '/index.html',
@@ -24,7 +25,24 @@ const APP_SHELL = [
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_SHELL)).then(() => self.skipWaiting())
+    caches.open(CACHE_NAME)
+      .then((cache) => cache.addAll(APP_SHELL))
+      .then(async () => {
+        // Pre-cache video separately so a failure here doesn't block app-shell install
+        try {
+          const cache = await caches.open(CACHE_NAME)
+          await Promise.all(
+            VIDEO_PATHS.map((path) =>
+              fetch(path).then((res) => {
+                if (res.ok) cache.put(path, res)
+              })
+            )
+          )
+        } catch (_) {
+          // Will be cached on first online visit
+        }
+      })
+      .then(() => self.skipWaiting())
   )
 })
 
@@ -36,12 +54,37 @@ self.addEventListener('activate', (event) => {
   )
 })
 
+// Serve a fully-cached video for range requests (needed for offline seek support)
+async function respondWithVideo(requestUrl) {
+  const cache = await caches.open(CACHE_NAME)
+  // Match by bare URL so a cached 200 response satisfies Range sub-requests too
+  const cached = await cache.match(requestUrl.href)
+  if (cached) return cached
+
+  try {
+    // Fetch the full file (no Range header) so we can cache and reuse it
+    const response = await fetch(requestUrl.href)
+    if (response.ok) {
+      cache.put(requestUrl.href, response.clone())
+    }
+    return response
+  } catch (_) {
+    return Response.error()
+  }
+}
+
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') {
     return
   }
 
   const requestUrl = new URL(event.request.url)
+
+  // Cache-first strategy for video assets to support offline and range requests
+  if (requestUrl.origin === self.location.origin && VIDEO_PATHS.includes(requestUrl.pathname)) {
+    event.respondWith(respondWithVideo(requestUrl))
+    return
+  }
 
   if (event.request.mode === 'navigate') {
     event.respondWith(

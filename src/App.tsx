@@ -112,6 +112,7 @@ export default function App() {
   const [state, setState] = useState<AppState>(readStoredState);
   const [activeAnswerIndex, setActiveAnswerIndex] = useState<number | null>(null);
   const answerTimerRef = useRef<number | undefined>();
+  const videoRef = useRef<HTMLVideoElement>(null);
   const content = quizContent[state.language];
   const { copy, questions, results } = content;
   const totalQuestions = questions.length;
@@ -165,6 +166,14 @@ export default function App() {
 
     return () => window.clearTimeout(timeoutId);
   }, [questions, state.resultId, state.screen, state.selectedAnswers, totalQuestions]);
+
+  useEffect(() => {
+    if (state.screen === "attract" && videoRef.current) {
+      videoRef.current.play().catch(() => {
+        // Autoplay blocked by browser policy — video stays static
+      });
+    }
+  }, [state.screen]);
 
   useEffect(() => {
     return () => window.clearTimeout(answerTimerRef.current);
@@ -294,7 +303,7 @@ export default function App() {
 
         {state.screen === "attract" ?
           <button className="attract-screen" onClick={goToStart} type="button">
-            <video className="campaign-video" aria-hidden="true" autoPlay loop muted playsInline preload="auto">
+            <video ref={videoRef} className="campaign-video" aria-hidden="true" autoPlay loop muted playsInline preload="auto">
               <source src={CAMPAIGN_VIDEO_SRC} type="video/mp4" />
             </video>
             <div className="attract-copy">
